@@ -6,11 +6,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/shinhanDS/install/eclipse-jee-2024-06/eclipse/lombok.jar"/>
-	<classpathentry kind="lib" path="C:/shinhanDS/work/library/jackson-annotations-2.17.2.jar"/>
-	<classpathentry kind="lib" path="C:/shinhanDS/work/library/jackson-core-2.17.2.jar"/>
-	<classpathentry kind="lib" path="C:/shinhanDS/work/library/jackson-databind-2.17.2.jar"/>
-	<classpathentry kind="lib" path="C:/shinhanDS/work/library/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/pej/git/ShinhanDS_Academy/my_lib/dist/my_lib.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/jackson-annotations-2.17.2.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/jackson-core-2.17.2.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/jackson-databind-2.17.2.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/my_lib.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/my_module_a.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/my_module_b.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
