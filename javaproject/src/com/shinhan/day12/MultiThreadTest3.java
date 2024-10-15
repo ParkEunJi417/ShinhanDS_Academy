@@ -6,8 +6,24 @@ public class MultiThreadTest3 {
 //		f1();
 //		f2();
 //		f3();
-		f4();
-		f5();
+//		f4();
+//		f5();
+		f6();
+		System.out.println("MAIN END");
+	}
+
+	private static void f6() {
+		// 데몬thread
+		AutoSaveThread tt = new AutoSaveThread();
+		tt.setDaemon(true); // 주thread가 끝나면 같이 종료
+		tt.start();
+		
+		try {
+			tt.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// PrintThread2 2번 방법
