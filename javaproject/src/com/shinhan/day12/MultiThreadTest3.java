@@ -4,7 +4,31 @@ public class MultiThreadTest3 {
 
 	public static void main(String[] args) {
 //		f1();
-		f2();
+//		f2();
+//		f3();
+		f4();
+	}
+
+	private static void f4() {
+		PrintThread2 t1 = new PrintThread2();
+		t1.start();
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		t1.setStop(true);
+		
+	}
+
+	private static void f3() {
+		WorkObject workObject=new WorkObject();
+		
+		ThreadA t1 = new ThreadA(workObject);
+		ThreadB t2 = new ThreadB(workObject);
+		t1.start();
+		t2.start();
 	}
 
 	private static void f2() {
