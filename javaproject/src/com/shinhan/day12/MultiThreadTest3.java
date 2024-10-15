@@ -7,8 +7,24 @@ public class MultiThreadTest3 {
 //		f2();
 //		f3();
 		f4();
+		f5();
 	}
 
+	// PrintThread2 2번 방법
+	private static void f5() {
+		PrintThread2 t1 = new PrintThread2();
+		t1.start();
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		t1.interrupt(); // InterruptedException 발생
+		
+	}
+
+	// PrintThread2 1번 방법
 	private static void f4() {
 		PrintThread2 t1 = new PrintThread2();
 		t1.start();
@@ -18,8 +34,7 @@ public class MultiThreadTest3 {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		t1.setStop(true);
-		
+		t1.setStop(true);		
 	}
 
 	private static void f3() {
