@@ -10,13 +10,13 @@ public class Account {
 	String ownerName; // 예금주 이름
 	int balance; // 잔액
 
-	Account(String accountNo, String ownerName, int balance) {
+	public Account(String accountNo, String ownerName, int balance) {
 		this.accountNo = accountNo;
 		this.ownerName = ownerName;
 		this.balance = balance;
 	}
 
-	void deposit(int amount) {
+	public void deposit(int amount) {
 		balance += amount;
 	}
 
@@ -25,5 +25,10 @@ public class Account {
 			return 0;
 		balance -= amount;
 		return amount;
+	}
+
+	public char[] getBalance() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
