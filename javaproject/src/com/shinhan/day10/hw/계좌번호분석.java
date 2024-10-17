@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class 계좌번호분석 {
-	public static void main(String[] args) {
+	public static void f(String[] args) {
 		// {"1-2-3-:3", "3-5-4-":4}
 		// HashMap<String, Integer> map = new HashMap<>();
 		// map.put("1-2-3-", map.getOrDefault("aa", 0));
@@ -12,17 +12,17 @@ public class 계좌번호분석 {
 		// System.out.println(cnt);
 	}
 	
-	public static void f(String[] args) {
+	public static void main(String[] args) {
 		계좌번호분석 e = new 계좌번호분석();
-		int[] result = e.solution(new String[] {"4514--234495-1","305-44-291501","1-2-34-495-8623","492134545151","623-421523-67-341","-5439-59639921","6235-7X3+47-7456","98-76-543-210","512-73-634901","000-999999-22-555","064-82-792561"
-		,"1-2-3-456789012","582845-385823","48572-39485-89012","4-5-2-593328484","4958-39-2945123-","49582039415423","7-3-7-000000000","485723-693812","39482746582734","1-1-1-111111111","A4944-5095-4951","4851293412223"
-		,"592356=5345", "49-694-4495-64", "5923565345%"});
+		int[] result = e.solution(new String[] {"4514--234495-1","305-44-291501","1-2-34-495-8623","492134545151","623-421523-67-341","-5439-59639921","6235-7X3+47-7456","98-76-543-210","512-73-634901","000-999999-22-555","064-82-792561"});
 		//int[] result = e.solution(new String[] {"1-2-3-456789012","582845-385823","48572-39485-89012","4-5-2-593328484","4958-39-2945123-","49582039415423","7-3-7-000000000","485723-693812","39482746582734","1-1-1-111111111","A4944-5095-4951","4851293412223"});
 		//int[] result = e.solution(new String[] { "592356=5345", "49-694-4495-64", "5923565345%" });
 		System.out.println(Arrays.toString(result));
 	}
 
 	private int[] solution(String[] accounts) {
+		int[] result = null;
+		int idx = 0;
 		HashMap<String, Integer> map = new HashMap<>();
 		
 		for(String acc:accounts) {
@@ -32,11 +32,21 @@ public class 계좌번호분석 {
 			// 2. 같은 은행 계좌인지? 패턴이 같으면 같은 은행 → 개수
 			String bankName = getBankName(acc);
 			
-			System.out.println(acc+"/"+bankName);
+//			System.out.println(acc+"/"+bankName);
 			
 			map.put(bankName, map.getOrDefault(bankName, 0)+1);
 		}
-		return null;
+		
+		result = new int[map.size()];
+		for(Integer i:map.values()) {
+			result[idx++]=i;
+		}
+		
+		return Arrays.stream(result)
+				.boxed()
+				.sorted((a,b)->b-a)
+				.mapToInt(a->a)
+				.toArray();
 	}
 
 	private String getBankName(String acc) {
@@ -48,9 +58,25 @@ public class 계좌번호분석 {
 		return sb.toString();
 	}
 
-	private boolean isVaild(String acc) {
+	private boolean isVaild(String account) {
 		//
-		if(!acc.matches("[0-9-]+")) return false;
+		if(!account.matches("[0-9-]+")) {
+			return false;
+		}
+
+		long count = account.chars().filter(c->Character.isDigit(c)).count();
+		if(count < 11L | count > 14L) {
+			return false;
+		}
+		
+		long dashCount = account.chars().filter(c->c=='-').count();
+		if(dashCount < 0L | dashCount > 3L) {
+			return false;
+		}
+		
+		if(account.contains("--") | account.startsWith("-") | account.endsWith("-")) {
+			return false;
+		}
 		return true;
 	}
 }
