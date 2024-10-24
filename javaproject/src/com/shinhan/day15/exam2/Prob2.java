@@ -3,14 +3,14 @@ import com.shinhan.day10.MyException;
 
 public class Prob2 {
 
-	public static void main(String[] args) throws IllegalSizeException {
+	public static void main(String[] args) {
 			System.out.println(leftPad("Samsung", 10, '#'));
 			System.out.println(leftPad("SDS", 5, '*'));
 			System.out.println(leftPad("Multicampus", 5, '@'));
 
 	}
 
-	public static String leftPad(String str, int size, char fillChar) throws IllegalSizeException {
+	public static String leftPad(String str, int size, char fillChar) {
 		String result="";
 		StringBuilder sb = new StringBuilder();
 		
