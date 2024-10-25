@@ -1,7 +1,9 @@
 package com.firstzone.dbtest;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.shinhan.util.DateUtil;
@@ -21,12 +23,65 @@ public class CRUDController {
 			case 3->{f_update();}
 			case 4->{f_delete();}
 			case 5->{f_selectById();}
-			case 9->{isStop=true;}
+			
+			case 6->{f_selectByDept();}
+			case 7->{f_selectByJob();}
+			case 8->{f_selectBySal();}
+			case 9->{f_selectByCondition();}
+			case 99->{isStop=true;}
 			default->{System.out.println("작업선택 오류. 다시 선택");}
 			}
 		}
 		sc.close();
 		System.out.println("=========프로그램 종료=========");
+	}
+
+	private static void f_selectByCondition() {
+		System.out.print("조회할 department_id>>");
+		int deptid = Integer.parseInt(sc.nextLine());
+		
+		System.out.print("조회할 job_id>>");
+		String jobid = sc.nextLine();
+				
+		System.out.print("얼마이상의 salary>>");
+		double salary = Double.parseDouble(sc.nextLine());
+		
+		System.out.print("입사일 hire_date(yyyy-MM-dd)>>");
+		String hdate = sc.nextLine();
+		Date hire_date = DateUtil.convertSqlDate(DateUtil.convertDate(hdate));
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("department_id", deptid);
+		map.put("job_id", jobid);
+		map.put("salary", salary);
+		map.put("hire_date", hire_date);
+		
+		List<EmpDTO> emplist = empService.selectByConditionService(map);
+		EmpView.display(emplist);
+	}
+
+	private static void f_selectBySal() {
+		System.out.print("조회할 salary>>");
+		double salary = Double.parseDouble(sc.nextLine());
+		
+		List<EmpDTO> emplist = empService.selectBySalaryService(salary);
+		EmpView.display(emplist);
+	}
+
+	private static void f_selectByJob() {
+		System.out.print("조회할 job_id>>");
+		String jobid = sc.nextLine();
+		
+		List<EmpDTO> emplist = empService.selectByJobIdService(jobid);
+		EmpView.display(emplist);
+	}
+
+	private static void f_selectByDept() {
+		System.out.print("조회할 department_id>>");
+		int deptid = Integer.parseInt(sc.nextLine());
+		
+		List<EmpDTO> emplist = empService.selectByDeptIdService(deptid);
+		EmpView.display(emplist);
 	}
 
 	private static void f_delete() {
@@ -65,7 +120,7 @@ public class CRUDController {
 		
 		System.out.print("6.hire_date(yyyy-MM-dd)>>");
 		String hdate = sc.nextLine();
-		Date hie_date = DateUtil.convertSqlDate(DateUtil.convertDate(hdate));
+		Date hire_date = DateUtil.convertSqlDate(DateUtil.convertDate(hdate));
 		
 		System.out.print("7.job_id(예:IT_PROG)>>");
 		String job_id = sc.nextLine();
@@ -88,7 +143,7 @@ public class CRUDController {
 		emp.setEmail(email);
 		emp.setEmployee_id(emp_id);
 		emp.setFirst_name(fname);
-		emp.setHire_date(hie_date);
+		emp.setHire_date(hire_date);
 		emp.setJob_id(job_id);
 		emp.setLast_name(lname);
 		emp.setManager_id(mid);
@@ -112,9 +167,10 @@ public class CRUDController {
 	}
 
 	private static void menu() {
-		System.out.println("-----------------------");
-		System.out.println("1.조회 2.입력 3.수정 4.삭제 5.상세보기 9.종료");
-		System.out.println("-----------------------");
+		System.out.println("----------------------------------------------");
+		System.out.println("1.조회 2.입력 3.수정 4.삭제 5.상세보기 6.부서직원 조회");
+		System.out.println("7.직책조회 8.급여조회 9.부서&직책&급여&급여일 조회 99.종료");
+		System.out.println("----------------------------------------------");
 		System.out.print("작업선택>>");
 	}
 }

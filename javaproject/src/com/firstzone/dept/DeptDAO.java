@@ -139,12 +139,20 @@ public class DeptDAO {
 		conn = DBUtil.getConnection();
 		// Statement는 ?(binding 변수 지원X) → PreparedStatement가 Statement를 상속받아 ?를 지원함
 		try {
+			// 자동 커밋 방지, 따로 사용하지 않으면 기본적으로 자동 커밋됨
+			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql_delete);
 			st.setInt(1, dept_id);
 
 			result = st.executeUpdate();
+			
+			conn.commit(); // DB에 반영
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(); // DB에 작업한 내용 취소
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
 			DBUtil.dbDisconnect(conn, st, null);

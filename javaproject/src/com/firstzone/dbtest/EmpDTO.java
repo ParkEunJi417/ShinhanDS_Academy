@@ -2,13 +2,19 @@ package com.firstzone.dbtest;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 // DTO : Data Transfer Object
 // VO : Value Object
 @Getter@Setter@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class EmpDTO {
 	int employee_id;
 	String first_name;
