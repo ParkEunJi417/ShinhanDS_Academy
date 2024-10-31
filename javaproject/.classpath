@@ -14,7 +14,7 @@
 	<classpathentry kind="lib" path="C:/shinhanDS/library/my_lib.jar"/>
 	<classpathentry kind="lib" path="C:/shinhanDS/library/my_module_a.jar"/>
 	<classpathentry kind="lib" path="C:/shinhanDS/library/my_module_b.jar"/>
-	<classpathentry kind="lib" path="C:/ShinhanDS/library/json-20230227.jar"/>
+	<classpathentry kind="lib" path="C:/shinhanDS/library/json-20230227.jar"/>
 	<classpathentry kind="lib" path="C:/oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc6_g.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
