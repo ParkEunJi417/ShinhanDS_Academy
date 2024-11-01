@@ -1,4 +1,4 @@
-package com.firstzone.dbtest;
+package com.firstzone.emp;
 
 import java.sql.Date;
 import java.util.List;
@@ -10,6 +10,10 @@ import java.util.Map;
 public class EmpService {
 
 	EmpDAO empDAO = new EmpDAO();
+	
+	public List<JobDTO> selectAllJobService() {
+		return empDAO.selectAllJob();
+	}
 	
 	public List<EmpDTO> selectAllService() {
 		return empDAO.selectAll();

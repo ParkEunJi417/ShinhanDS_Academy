@@ -1,4 +1,4 @@
-package com.firstzone.dbtest;
+package com.firstzone.emp;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -26,6 +26,30 @@ public class EmpDAO {
 	// 4.부서, 직책, 급여, 입사일 조건으로 조회
 	// → where department_id = ? and job_id = ? and salary >= ? and hire_date >= ?
 
+	public List<JobDTO> selectAllJob() {
+		// 모든 직원을 조회하기
+		String sql = "select * from jobs";
+		conn = DBUtil.getConnection();
+		List<JobDTO> joblist = new ArrayList<JobDTO>();
+
+		try {
+			st = conn.prepareStatement(sql);
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				JobDTO job = makeJob(rs);
+				joblist.add(job);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
+		}
+		
+		return joblist;
+	}
+	
 	public List<EmpDTO> selectAll() {
 		// 모든 직원을 조회하기
 		String sql = "select * from employees";
@@ -324,5 +348,16 @@ public class EmpDAO {
 		emp.setSalary(rs.getDouble("salary"));
 
 		return emp;
+	}
+	
+	private JobDTO makeJob(ResultSet rs) throws SQLException {
+		JobDTO job = new JobDTO();
+		
+		job.setJob_id(rs.getString("job_id"));
+		job.setJob_title(rs.getString("job_title"));
+		job.setMin_salary(rs.getInt("min_salary"));
+		job.setMax_salary(rs.getInt("max_salary"));
+		
+		return job;
 	}
 }

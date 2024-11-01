@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>입력양식1</h1>
+<!-- html 주석
+form : 입력한 자료를 서버로 전송
+action : 서버페이지 주소
+method : 
+ 1)get방식 → 4096byte까지만 가능, 주소창에 데이터가 보여져 보안불가, 자동 인코딩/디코딩
+ 2)post방식 → 자리수 제한 없음, 주소창에 데이터가 보여지지 않음, 자동 인코딩/디코딩 불가
+ 			 ▶ request.setCharacterEncoding("UTF-8"); 필요
+submit : 입력된 정보를 가지고 서버로 전송하라는 의미
+input 요소들은 반드시 name을 입력
+
+Restful 방식 → 데이터 부여
+https://news.naver.com/section/105
+
+get방식
+ 1)주소창에 직접입력하고 enter
+ 2)<a href=""></a>
+ 3)<form method="get"></form>
+ 4)<form></form>
+ 
+post방식은 "post"라고 명시해야함
+-->
+<a href="../jsptest/input1.jsp?userid=aa&username=bb">a태그는 get방식 요청이다.</a>
+<form action="../jsptest/input1.jsp" method="get">
+  id: <input name="userid"><br>
+  name:<input name="username"><br>
+  <input type="submit" value="서버전송(get)">
+</form>
+<hr>
+<form action="../jsptest/input1.jsp" method="post">
+  id: <input name="userid"><br>
+  name:<input name="username"><br>
+  <input type="submit" value="서버전송(post)">
+</form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.firstzone.dbtest;
+package com.firstzone.emp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

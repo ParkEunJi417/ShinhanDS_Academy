@@ -30,8 +30,11 @@
 		<img alt="무지개컵이미지" src="../resources/image/cup-4.jpg" width="200" height="100">
 		<img alt="땡땡이컵이미지" src="/appleShop/resources/image/cup-3.jpg" width="200" height="100">
 	</div>
+	
 	<table border="1">
-		<caption>부서목록</caption>
+		<caption>부서목록
+			<a href="deptInsert.jsp">부서등록</a>
+		</caption>
 		<thead>
 		<tr>
 			<th>department_id</th>

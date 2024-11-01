@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 
+inline요소 : 자신의 내용만큼만 자리를 차지함 ex)img,a,label
+			width라는 속성을 가질 수 없음
+block요소 : 한줄 전체를 차지함 ex)div,p,h 등
+ -->
+<style>
+ lable{
+ 		width: 100px;
+ 		display: inline-block;
+ 		background-color: purple;
+ 		color: white;
+ }
+</style>
+</head>
+<body>
+<h1>입력양식2</h1>
+<form action="">
+  <fieldset>
+    <legend>사용자정보</legend>
+    <lable for="userid">id:</lable><input id="userid"><br>
+    <lable for="username">name:</lable><input id="username"><br>
+    <lable for="useremail">email:</lable><input id="useremail"><br>
+  </fieldset>
+  <fieldset>
+    <legend>사용자정보</legend>
+    <input>
+    <input>
+    <input>
+  </fieldset>
+</form>
+</body>
+</html>

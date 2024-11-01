@@ -1,6 +1,6 @@
-<%@page import="com.firstzone.dbtest.EmpDTO"%>
+<%@page import="com.firstzone.emp.EmpDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.firstzone.dbtest.EmpService"%>
+<%@page import="com.firstzone.emp.EmpService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

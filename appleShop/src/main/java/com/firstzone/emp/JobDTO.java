@@ -1,4 +1,4 @@
-package com.firstzone.dbtest;
+package com.firstzone.emp;
 
 import java.sql.Date;
 
@@ -15,16 +15,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EmpDTO {
-	int employee_id;
-	String first_name;
-	String last_name;
-	String email;
-	String phone_number;
-	Date hire_date;
+public class JobDTO {
 	String job_id;
-	double salary;
-	double commission_pct;
-	int manager_id;
-	int department_id;
+	String job_title;
+	int min_salary;
+	int max_salary;	
 }
