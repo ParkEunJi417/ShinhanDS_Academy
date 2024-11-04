@@ -14,25 +14,36 @@
 <body>
 	<div>
 	<h1>수습 국원 지원 양식</h1>
+	<form action="../jsptest/p123Result.jsp" method="get">
+	<input type="submit" value="서버전송">
 	<table border="1">
 			<tr>
 				<th rowspan="3">개인정보</th>
 				<th>이름</th>
-				<td><input max="10"></td>
+				<td class="mydata">
+				<input name="myname">   
+				</td>
 			</tr>
 			<tr>
 				<th>학과/학번</th>
-				<td><input max="10"></td>
+				<td class="mydata"> 
+				<input name="mymajor">
+				</td>
 			</tr>
 			<tr>
 				<th>연락처</th>
-				<td><input max="10"></td>
+				<td class="mydata">
+				<input name="myphone">
+				</td>
 			</tr>
 			<tr>
 				<th>지원분야</th>
-				<td colspan="2"><input max="30" size="30"></td>
+				<td colspan="2" class="mydata2">
+				 <textarea rows="5" cols="80" name="myregister"></textarea>   
+				</td>
 			</tr>
 	</table>
+	</form>
 	</div>
 </body>
 </html>

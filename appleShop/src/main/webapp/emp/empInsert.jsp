@@ -31,10 +31,20 @@ List<JobDTO> joblist = eService.selectAllJobService();
 		border: 1px dotted gray;
 		margin: 0 auto;
 	}
+	input,select {
+		width: 200px;
+		box-sizing: border-box;
+	}
+
 </style>
 </head>
 <body>
+<!--  JSP(Java Server Page) :
+		동적HTML 생성함
+		HTML + JAVA 가능
+ -->
 <div id="container">
+<a href="empAll.jsp">직원조회</a>
 <h1>직원등록</h1>
 <form action="empRegister.jsp" method="post">
 	<label>직원번호:</label><input type="number" name="employee_id"><br>
@@ -64,7 +74,7 @@ List<JobDTO> joblist = eService.selectAllJobService();
 	<label>이메일:</label><input type="text" name="email"><br>
 	<label>fname:</label><input type="text" name="first_name"><br>
 	<label>lname:</label><input type="text" name="last_name"><br>
-	<label>job:
+	<label>job:</label>
 	<select name="job_id">
 		<%
 		for(JobDTO job:joblist){
@@ -76,7 +86,7 @@ List<JobDTO> joblist = eService.selectAllJobService();
 	</select><br>
 	<label>phone:</label><input type="text" name="phone_number"><br>
 	<label>입사일:</label><input type="date" name="hire_date"><br>
-	<input type="submit" value="직원저장">
+	<input type="submit" value="직원저장" id="save">
 </form>
 </div>
 </body>

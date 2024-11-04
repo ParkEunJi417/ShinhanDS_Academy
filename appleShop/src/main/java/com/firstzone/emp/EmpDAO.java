@@ -27,7 +27,7 @@ public class EmpDAO {
 	// → where department_id = ? and job_id = ? and salary >= ? and hire_date >= ?
 
 	public List<JobDTO> selectAllJob() {
-		// 모든 직원을 조회하기
+		// 모든 Job을 조회하기
 		String sql = "select * from jobs";
 		conn = DBUtil.getConnection();
 		List<JobDTO> joblist = new ArrayList<JobDTO>();
@@ -37,7 +37,13 @@ public class EmpDAO {
 			rs = st.executeQuery();
 
 			while (rs.next()) {
-				JobDTO job = makeJob(rs);
+				JobDTO job = new JobDTO();
+				
+				job.setJob_id(rs.getString("job_id"));
+				job.setJob_title(rs.getString("job_title"));
+				job.setMin_salary(rs.getInt("min_salary"));
+				job.setMax_salary(rs.getInt("max_salary"));
+				
 				joblist.add(job);
 			}
 		} catch (SQLException e) {
@@ -52,7 +58,7 @@ public class EmpDAO {
 	
 	public List<EmpDTO> selectAll() {
 		// 모든 직원을 조회하기
-		String sql = "select * from employees";
+		String sql = "select * from employees order by employee_id";
 		conn = DBUtil.getConnection();
 		List<EmpDTO> emplist = new ArrayList<EmpDTO>();
 
@@ -348,16 +354,5 @@ public class EmpDAO {
 		emp.setSalary(rs.getDouble("salary"));
 
 		return emp;
-	}
-	
-	private JobDTO makeJob(ResultSet rs) throws SQLException {
-		JobDTO job = new JobDTO();
-		
-		job.setJob_id(rs.getString("job_id"));
-		job.setJob_title(rs.getString("job_title"));
-		job.setMin_salary(rs.getInt("min_salary"));
-		job.setMax_salary(rs.getInt("max_salary"));
-		
-		return job;
 	}
 }

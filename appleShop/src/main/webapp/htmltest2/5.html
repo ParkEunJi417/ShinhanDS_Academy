@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#container {
+		border: 1px solid gray;
+	}
+	.box1, .box2, .box3 {
+		border: 2px solid blue;
+		width: 200px;
+		padding: 10px;
+	}
+	.box2 {
+		/* width = 내용 + border*2 + padding*2 
+		   200 = 176 + 2*2 + 10*2
+		*/
+		box-sizing: border-box;
+	}
+	.box3 {
+		/* default 
+			크기 : 224
+			내용 : 200
+			border*2 + padding*2
+		*/
+		box-sizing: content-box;
+	}
+	img {
+		border: 1px solid red;
+		border-radius: 50%;
+		margin: 20px 50px 20px;
+		padding: 10px;
+	}
+</style>
+</head>
+<body>
+	<div id="container">
+		<div class="box1">a</div>
+		<div class="box2">b</div>
+		<div class="box3">c</div>
+	</div>
+	
+	<div id="container2">aaaa</div>
+	<img alt="" src="../resources/image/cup-3.jpg">
+</body>
+</html>

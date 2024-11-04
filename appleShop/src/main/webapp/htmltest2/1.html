@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="css/external.css" rel="stylesheet">
+<style>
+ * { /* 전체 선택자 */
+ 	margin: 0;
+ }
+ p { /* 태그 선택자 */
+ 	font-style: italic;
+ }
+ .aa { /* class 선택자 */
+ 	border: 1px solid black;
+ 	padding: 25px; /* border와 content사이의 간격 */
+ }
+ #myp { /* ID 선택자 → 문서내에서 유일함 */
+ 		/* internal css */
+ 	background-color:orange;
+ }
+ /*
+ h1 { text-align: center;}
+ p { text-align: center;}
+ */
+ /* group 선택자*/
+ h1,p { text-align: center;}
+</style>
+</head>
+<body>
+	<h1>CSS익히기(적용X)</h1>
+	<h1 class="aa">CSS익히기(적용O)</h1>
+	<h2 class="aa">class 선택자(적용O)</h2>
+	<h2>class 선택자(적용X)</h2>
+	<p>1.브라우저 기본 지원(user agent stylesheet) </p>
+	<p style="color:blue">2-1.사용자 정의(inline) : 태그에 스타일을 직접 설정(권장안함) </p>
+	<p id="myp">2-2.사용자 정의(internal) </p>
+	<p id="myp2">2-3.사용자 정의(external) </p>
+</body>
+</html>
