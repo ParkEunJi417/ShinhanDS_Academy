@@ -17,11 +17,30 @@
 	th, td { padding: 5px; }
 	th { background-color: orange; }
 	/* tag 이름 사이의 공백은 자손을 의미 */
-	tbody tr:nth-child(2n) { /* nth-child(2n) → 짝수번째 */
+	/* tbody tr:nth-child(2n) { 
+		nth-child(2n) → 짝수번째 
 		background-color: lightgray;
 	}
-	tbody tr:nth-child(2n+1) { /* nth-child(2n+1) → 홀수번째 */
+	tbody tr:nth-child(2n+1) { 
+		nth-child(2n+1) → 홀수번째 
 		background-color: lightblue;
+	} */
+	tbody tr:nth-child(even) {
+		background-color: lightgray;
+	}
+	/* email 칼럼에 대해 글씨색 변경 */
+	tbody td:nth-of-type(5) {
+		color: blue;
+	}
+	/* first_name이 'S'로 시작하는 직원들 선택 style 적용 */
+	tbody td:nth-child(2)[data-fname ^= 'S'] {
+		color: purple;
+	}
+	tbody td:nth-child(3)[data-lname $= 'n'] {
+		color: purple;
+	}
+	tbody td:nth-child(7)[data-job='IT_PROG'] {
+		color: yellow;
 	}
 	caption {
 		font-family: "Gaegu", sans-serif;
@@ -72,12 +91,12 @@
 			for(EmpDTO emp:emplist){ %>
 				<tr>
 					<td><%=emp.getEmployee_id() %></td>
-					<td><%=emp.getFirst_name() %></td>
-					<td><%=emp.getLast_name() %></td>
+					<td data-fname="<%=emp.getFirst_name() %>"><%=emp.getFirst_name() %></td>
+					<td data-lname="<%=emp.getLast_name() %>"><%=emp.getLast_name() %></td>
 					<td><%=emp.getDepartment_id() %></td>
 					<td><%=emp.getEmail() %></td>
 					<td><%=emp.getPhone_number() %></td>
-					<td><%=emp.getJob_id() %></td>
+					<td data-job="<%=emp.getJob_id() %>"><%=emp.getJob_id() %></td>
 					<td><%=emp.getCommission_pct() %></td>
 					<td><%=emp.getSalary() %></td>
 					<td><%=emp.getHire_date() %></td>

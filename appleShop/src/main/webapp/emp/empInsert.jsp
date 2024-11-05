@@ -35,7 +35,12 @@ List<JobDTO> joblist = eService.selectAllJobService();
 		width: 200px;
 		box-sizing: border-box;
 	}
-
+	input[class="required"], select[class="required"] {
+		border: 3px dotted blue;
+	}
+	input[type="submit"] {
+		background-color: orange;
+	}
 </style>
 </head>
 <body>
@@ -47,7 +52,7 @@ List<JobDTO> joblist = eService.selectAllJobService();
 <a href="empAll.jsp">직원조회</a>
 <h1>직원등록</h1>
 <form action="empRegister.jsp" method="post">
-	<label>직원번호:</label><input type="number" name="employee_id"><br>
+	<label>직원번호:</label><input class="required" type="number" name="employee_id"><br>
 	<label>부서번호:</label>
 	
 	<select name="department_id">
@@ -71,11 +76,11 @@ List<JobDTO> joblist = eService.selectAllJobService();
 	</select><br>
 	<label>급여:</label><input type="number" name="salary"><br>
 	<label>커미션:</label><input type="text" name="commission_pct"><br>
-	<label>이메일:</label><input type="text" name="email"><br>
+	<label>이메일:</label><input class="required" type="text" name="email"><br>
 	<label>fname:</label><input type="text" name="first_name"><br>
-	<label>lname:</label><input type="text" name="last_name"><br>
+	<label>lname:</label><input class="required" type="text" name="last_name"><br>
 	<label>job:</label>
-	<select name="job_id">
+	<select class="required" name="job_id">
 		<%
 		for(JobDTO job:joblist){
 		%>
@@ -85,7 +90,7 @@ List<JobDTO> joblist = eService.selectAllJobService();
 		<%} %>
 	</select><br>
 	<label>phone:</label><input type="text" name="phone_number"><br>
-	<label>입사일:</label><input type="date" name="hire_date"><br>
+	<label>입사일:</label><input class="required" type="date" name="hire_date"><br>
 	<input type="submit" value="직원저장" id="save">
 </form>
 </div>

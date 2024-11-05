@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#container {
+		border: 1px solid gray;
+		height: 100vh;
+	}
+	.box {
+		border: 5px solid gray;
+		width: 100px;
+		height: 100px;
+		padding: 10px;
+		margin: 5px;
+		/* 기본설정 : box-sizing: content-box; */
+	}
+	.second {
+		/* width(100px) = content(70px) + margin(5px)*2 + padding(10px)*2 */
+		box-sizing: border-box;
+		margin: 50px 30px;
+	}
+</style>
+</head>
+<body>
+<div id="container">
+	<div class="box"></div>
+	<div class="box second"></div> <!-- class명을 box와 second 2개 부여함 -->
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+</div>
+</body>
+</html>
