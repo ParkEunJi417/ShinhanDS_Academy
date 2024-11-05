@@ -63,3 +63,11 @@
 	
 </body>
 </html>
+
+<!-- 
+insert into game values (seq_gameNo.nextval,10,9,4,5,'2024-11-04');
+insert into game values (seq_gameNo.nextval,3,5,14,5,'2024-11-04');
+insert into game values (seq_gameNo.nextval,7,2,1,5,'2024-11-04');
+insert into game values (seq_gameNo.nextval,4,6,5,10,'2024-11-04');
+insert into game values (seq_gameNo.nextval,8,1,1,7,'2024-11-04');
+ -->
