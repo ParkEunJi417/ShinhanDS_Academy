@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+  // 변수 선언시 local이 좋고 var 사용하는 것이 좋음
+  var sum = 100; // scope(global)
+  sum2 = 200; // scope(global)
+  function f3() {
+	  var sum3 = 300; // scope(local)
+	  sum4 = 400; // scope(global) → 함수호출시 global 영역으로 감
+	  alert(sum+sum2+sum3+sum4);
+  }
+  f3();
+  alert(sum+sum2+sum4);
+  
+  // 호이스팅 : 실행하기 전에 var, function정의를 맨위로 올림
+  //alert(score); // undefined → 선언했지만 할당 안함
+  
+  var score = 100; // 전역변수
+  //f2();
+  //f2();
+  function f2() {
+	  var score2 = 200; // 지역변수(함수내에서만 접근가능)
+	  alert("함수 수행됨▶"+score+score2);	  
+  }
+  
+  function f1() {
+	  // 함수는 문장들의 묶음 → 정의
+	  // 이미 JS가 제공하는 함수가 있음 → alert() 등
+	  // var alert = 100;
+	  
+	  // score2 is not defined
+	  // alert("내장함수의 이름으로 식별자 이름을 주지말것!!"+score+score2);
+	  alert("내장함수의 이름으로 식별자 이름을 주지말것!!"+score);
+  }
+</script>
+</head>
+<body>
+<h1>Function</h1>
+<button onclick="f1()">선언적함수호출</button>
+<button onclick="f2()">여러번함수호출</button>
+</body>
+</html>

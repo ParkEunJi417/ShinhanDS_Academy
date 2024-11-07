@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="external.js"></script>
+<script>
+  function myDisplayer(something) {
+	// 전달받은 값을 화면에 출력
+    document.getElementById("here").innerHTML = something;
+  }
+  function myCalculator(num1, num2, myCallback) {
+	// 값2개, 함수를 받아서 계산결과와 받은 함수를 실행
+    let sum = num1 + num2;
+    myCallback(sum);
+  }
+  function call1(){
+	  myCalculator(5, 5, myDisplayer);
+  }
+  
+  function call6(){
+	  add(1,2,3);
+	  var arr = [10,20,30];
+	  add(...arr);
+  }
+  function add(){
+	  document.querySelector("#demo").innerHTML=
+		  arguments[0]+arguments[1]+arguments[2];
+  }
+  function add(...arr){
+	  document.querySelector("#demo").innerHTML+="<br>"+
+		  (arr[0]+arr[1]+arr[2])+"!!!!";
+  }
+  /*
+  이벤트 : 일어나는 사건 예)click, hover
+  이벤트속성 : 이벤트와 이벤트핸들러를 연결하는 역할 예)onclick
+  이벤트핸들러 : 
+  */
+</script>
+</head>
+<body>
+<h1>javascript function</h1>
+<button onclick="call1()">콜백함수</button>
+<button onclick="call2()">클로저</button>
+<button onclick="call6()">전개연산자(...)</button>
+<hr>
+<div id="demo">여기</div>
+<div id="here">여기2</div>
+</body>
+</html>
