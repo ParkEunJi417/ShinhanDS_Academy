@@ -2,7 +2,10 @@ package com.baseball;
 
 import java.sql.Date;
 
+import com.firstzone.emp.EmpDTO;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter@Setter
+@Builder
 public class RecordGameDTO {
 	
 	int game_no;		// 경기번호(game)

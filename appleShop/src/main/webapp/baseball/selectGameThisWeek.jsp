@@ -9,57 +9,82 @@
 <meta charset="UTF-8">
 <title>야구⚾</title>
 <style>
- table {margin: 0 auto;}
- table, tr {border-collapse: collapse; padding: 10px; text-align: center;}
- caption {font-size: 35px;}
- .test[data-teamid = '10'] {
-		content: url("images/10.png");
-		border: 1px solid gray;
-	}
- div>div {
- 	display: inline-block;
+* {
+	font-family: "맑은 고딕";
+}
+table, td, th {
+	border:1px solid black;
+	border-collapse: collapse;
+}
+table {	margin: 0 auto; }
+td { height: 32px; }
+th { text-align: center; }
+div {
+	float:left;
+	height: 32px;
+	line-height: 32px;
+}
+.date {
+	width: 100px;
+	text-align: center;
+}
+.score {
+	width: 25px;
+	line-height: 32px;
+	text-align: center;
+	font-weight: bold;
+}
+.teamName {
+ 	width: 130px;
  	text-align: center;
- 	height: 32px;
- 	
  }
- div[data-teamid="10"]{
- 	content: url("images/10.png");
- 	width: 32px;
- }
+div[data-teamid="1"]{content: url("images/1.png");}
+div[data-teamid="2"]{content: url("images/2.png");}
+div[data-teamid="3"]{content: url("images/3.png");}
+div[data-teamid="4"]{content: url("images/4.png");}
+div[data-teamid="5"]{content: url("images/5.png");}
+div[data-teamid="6"]{content: url("images/6.png");}
+div[data-teamid="7"]{content: url("images/7.png");}
+div[data-teamid="8"]{content: url("images/8.png");}
+div[data-teamid="9"]{content: url("images/9.png");}
+div[data-teamid="10"]{content: url("images/10.png");}
 </style>
 </head>
 <body>
-	<table border="1">
-		<caption>이번주 야구일정</caption>
-		<thead>
+		<table>
+			<caption>이번주 야구일정</caption>
 			<tr>
-				<td>경기일정</td>
-				<td colspan="3">매칭팀</td>
+				<th>경기일정</th>
+				<th>매칭</th>
 			</tr>
-		</thead>
-		<tbody>
-		<%
-		BaseballService bService = new BaseballService();
-		List<RecordGameDTO> gamelist = bService.selectGameThisWeek();
-		for(RecordGameDTO game:gamelist){%> 
+			<tbody>
+			<%
+			BaseballService bService = new BaseballService();
+			List<RecordGameDTO> gamelist = bService.selectGameThisWeek();
+			
+			for(RecordGameDTO game:gamelist){
+				int scoreA = game.getTeam_score_a();
+		        int scoreH = game.getTeam_score_h();
+		        String colorA = scoreA > scoreH?"rgb(68,114,196)":"gray";
+		        String colorH = scoreA < scoreH?"rgb(68,114,196)":"gray";	        
+			%>
 			<tr>
-				<td><%= game.getGame_date() %></td>
-				
-				<td>
-					<div>
-						<div><%= game.getTeam_name_a() %></div>
-						<div data-teamid="<%= game.getTeam_id_a() %>">한화로고</div>
-					</div>
+				<td class="date"><%= game.getGame_date() %></td>
+				<td> 
+					<div class="teamName"><%= game.getTeam_name_a() %></div>
+					<div data-teamid="<%= game.getTeam_id_a() %>">로고</div>
+					<div class="score" style="color: <%= colorA %>;">
+						<%= game.getTeam_score_a() %></div>
+					<div> vs </div>
+					<div class="score" style="color: <%= colorH %>;">
+						<%= game.getTeam_score_h() %></div>
+					<div data-teamid="<%= game.getTeam_id_h() %>">로고</div>
+					<div class="teamName"><%= game.getTeam_name_h() %></div>
 				</td>
-				<td>vs</td>
-				<td data-teamid="<%= game.getTeam_id_h() %>">
-					<%= game.getTeam_name_h() %></td>
-				<!-- <td><%= game.getTeam_score_a() %> : <%= game.getTeam_score_h() %></td> -->
-			</tr>
-		<%} %>
-		</tbody>
-		
-	</table>	
+			</tr>	
+			<%} %>
+			</tbody>
+		</table>
 	
 </body>
 </html>

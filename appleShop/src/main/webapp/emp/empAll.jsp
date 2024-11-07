@@ -55,7 +55,50 @@
 		display: block;
 		padding: 10px;
 	}
+	.red {
+		color:red;
+	}
+	.it_prog {
+		background-color: blue;
+	}
 </style>
+<script>
+window.onload=function(){
+	var obj = document.querySelector("#btn_search");
+	var obj2 = document.querySelector("#btn_search_job");
+	
+	obj.onclick = f_salary; // 이벤트 속성에 이벤트 핸들러 연결
+	obj2.onclick = f_job;
+};
+
+function f_salary(){
+	var sal = parseInt(document.querySelector("#input_sal").value);
+	var tds = document.querySelectorAll("td:nth-child(9)");
+	
+	for(let i=0;i<tds.length;i++){
+		var sal2 = parseInt(tds[i].innerText);
+		if(sal <= sal2){
+			tds[i].setAttribute("class","red");
+		} else {
+			tds[i].removeAttribute("class");
+		}
+	}
+}
+
+function f_job(){
+	var job = document.querySelector("#input_job").value;
+	var tds = document.querySelectorAll("td:nth-child(7)");
+	
+	for(let i=0;i<tds.length;i++){
+		var job2 = tds[i].innerText;
+		if(job == job2){
+			tds[i].setAttribute("class","it_prog");
+		} else {
+			tds[i].removeAttribute("class");
+		}
+	}
+}
+</script>
 </head>
 <body>
 	<div id="container">
@@ -67,6 +110,10 @@
 		<div>
 		<a class="new" href="empInsert.jsp">신규직원등록</a>
 		<a class="new" href="../dept/deptInsert.jsp">신규부서등록</a>
+		<button id="btn_search" class="btn btn-success">금액으로 찾기</button>
+		<input type="number" id="input_sal" value="10000">
+		<button id="btn_search_job" class="btn btn-success">부서로 찾기</button>
+		<input type="text" id="input_job" value="IT_PROG">
 		<table>
 			<caption>직원목록</caption>
 			<thead>
