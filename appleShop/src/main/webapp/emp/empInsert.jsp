@@ -21,27 +21,60 @@ List<JobDTO> joblist = eService.selectAllJobService();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	label {
-		width:100px; /* width속성은 inline에서 사용불가, block요소에서만 가능 */
-		display:inline-block;
-		background-color: skyblue;
-	}
-	#container {
-		width:70%;
-		border: 1px dotted gray;
-		margin: 0 auto;
-	}
-	input,select {
-		width: 200px;
-		box-sizing: border-box;
-	}
-	input[class="required"], select[class="required"] {
-		border: 3px dotted blue;
-	}
-	input[type="submit"] {
-		background-color: orange;
-	}
+	
+  label {
+      background-color: teal;
+      color: white;
+      text-align:center;
+      padding: 5px;
+      margin-bottom:5px;
+      display:inline-block;
+	  width: 100px; /* width속성은 inline에서 사용불가, block요소에서만 가능*/
+  }
+  #container{
+     width: 70%;
+     border: 1px dotted gray;
+     margin: 0 auto;
+  }
+  input, select {
+     width: 200px;
+     box-sizing: border-box;
+     padding: 5px;
+      margin-bottom:5px;
+  }
+  
+  /*
+  .required {
+     border: 3px dotted red;
+  }*/
+  
+  input[class="required"], select[class="required"]{
+   border: 3px dotted blue;
+  }
+  input[type="submit"]{
+     background-color: orange;
+  }
+  
+  
 </style>
+<script>
+//고전 이벤트 모델 → 객체.이벤트 속성 = 이벤트 핸들러
+  window.onload = function(){
+	
+	  // onsubmit는 default event, 이미 이벤트 핸들러가 만들어져있음
+	  // submit 버튼을 누르면 form의 input들이 서버에 전송됨
+	  // 개발자가 이벤트 핸들러를 넣으면 먼저 수행하고 default 이벤트 핸들러도 수행됨
+	  document.querySelector("#myfrm").onsubmit = function(){
+		  var empid = document.querySelector('input[name="employee_id"]').value;
+		  
+		  if(empid == null || empid.trim() == ""){
+			  alert('직원번호는 필수컬럼입니다.');
+			  return false;
+		  }
+		  
+	  };
+  };
+</script>
 </head>
 <body>
 <!--  JSP(Java Server Page) :
@@ -51,7 +84,7 @@ List<JobDTO> joblist = eService.selectAllJobService();
 <div id="container">
 <a href="empAll.jsp">직원조회</a>
 <h1>직원등록</h1>
-<form action="empRegister.jsp" method="post">
+<form id="myfrm" action="empRegister.jsp" method="post">
 	<label>직원번호:</label><input class="required" type="number" name="employee_id"><br>
 	<label>부서번호:</label>
 	
