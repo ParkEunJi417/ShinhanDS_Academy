@@ -20,7 +20,7 @@
   }
   .info, .login {
   	margin: 0px;
-  	heigth: 52px;
+  	height: 52px;
   	display: inline-block;
   }
   .login{ margin-left: 5px; } 

@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<style>
+  h1, a {
+  	display: flex;
+  	align-items: center; 
+  	justify-content: center;
+  }
+</style>
 <%
 request.setCharacterEncoding("utf-8");
 
