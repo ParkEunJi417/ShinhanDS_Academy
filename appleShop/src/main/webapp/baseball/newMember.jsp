@@ -14,6 +14,8 @@
 	margin-right: 5px;
 	padding: 3px;
   }
+  input { height: 20px; }
+  a { text-decoration: none;}
   .div_form, h1, .insert, .check {
   	display: flex;
   	align-items: center; 
@@ -29,6 +31,7 @@
 </style>
 </head>
 <body>
+<a href="main.jsp">홈으로</a>
 <h1>회원가입</h1>
 <form action="memberRegister.jsp" method="post">
 	<div class="div_form">

@@ -8,28 +8,33 @@
 <style>
   label {
 	width: 30px;
-	height: 20px;
+	height: 26px;
 	display: inline-block;
 	text-align: right;
 	margin-right: 5px;
+	padding: 3px;
   }
-  .div_form, h1, a, .insert {
+  a { text-decoration: none;}
+  .div_form, h1, div a, .insert {
   	display: flex;
   	align-items: center;
   	justify-content: center;
   }
   .info, .login {
-  	margin: 0px;
-  	height: 52px;
+  	height: 65px;
   	display: inline-block;
   }
-  .login{ margin-left: 5px; } 
+  .login{
+	margin-left: 5px;
+	align-content: center;
+  } 
   .input { height: 20px; }
   
-  #login { height: 52px; }
+  #login { height: 60px; }
 </style>
 </head>
 <body>
+<a href="main.jsp">홈으로</a>
 <div class="all">
 	<h1>야구 직관 프로그램</h1>
 	<form>
@@ -45,6 +50,9 @@
 	</form>
 	<div class="insert">
 		<a href="newMember.jsp">회원가입</a>
+	</div>
+	<div class="game">
+		<a href="selectGameThisWeek.jsp">이번주 경기일정</a>
 	</div>
 </div>
 </body>

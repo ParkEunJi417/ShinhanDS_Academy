@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>야구⚾</title>
+<title>이번주 야구일정</title>
 <style>
 * {
 	font-family: "맑은 고딕";
@@ -24,6 +24,7 @@ div {
 	height: 32px;
 	line-height: 32px;
 }
+a { text-decoration: none;}
 .date {
 	width: 100px;
 	text-align: center;
@@ -51,6 +52,7 @@ div[data-teamid="10"]{content: url("images/10.png");}
 </style>
 </head>
 <body>
+<a href="main.jsp">홈으로</a>
 		<table>
 			<caption>이번주 야구일정</caption>
 			<tr>
@@ -90,9 +92,9 @@ div[data-teamid="10"]{content: url("images/10.png");}
 </html>
 
 <!-- 
-insert into game values (seq_gameNo.nextval,10,9,4,5,'2024-11-04');
-insert into game values (seq_gameNo.nextval,3,5,14,5,'2024-11-04');
-insert into game values (seq_gameNo.nextval,7,2,1,5,'2024-11-04');
-insert into game values (seq_gameNo.nextval,4,6,5,10,'2024-11-04');
-insert into game values (seq_gameNo.nextval,8,1,1,7,'2024-11-04');
+insert into game values (seq_gameNo.nextval,10,9,4,5,'2024-11-12');
+insert into game values (seq_gameNo.nextval,3,5,14,5,'2024-11-12');
+insert into game values (seq_gameNo.nextval,7,2,1,5,'2024-11-12');
+insert into game values (seq_gameNo.nextval,4,6,5,10,'2024-11-12');
+insert into game values (seq_gameNo.nextval,8,1,1,7,'2024-11-12');
  -->
