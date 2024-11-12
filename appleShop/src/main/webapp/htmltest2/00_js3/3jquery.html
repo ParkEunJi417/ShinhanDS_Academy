@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-3.7.1.min.js"></script>
+<script>
+$(f_initial);
+function f_initial(){
+	$("button:nth-of-type(1)").click(f_go);
+	$("button:nth-of-type(2)").click(f_go2);
+	$("button:nth-of-type(3)").click(f_go3);
+	$("button:nth-of-type(4)").click(f_go4);
+	$("button:nth-of-type(5)").click(f_go5);
+	$("button:nth-of-type(6)").click(f_go6);
+	$("button:nth-of-type(7)").click(f_go7);
+	$("button:nth-of-type(8)").click(f_go8);
+	$("button:nth-of-type(9)").click(f_go9);
+	$("div button:nth-of-type(1)").click(f_go10);
+}
+
+function f_go10(){
+	var txt = $(this).text();
+	
+	if(txt == "활성화하기"){
+		$(this).text("비활성화하기");
+		$(this).parent().css("background-color","lightgreen");
+		$(this).parent().find("span").text("활성화하기");
+	} else{
+		$(this).text("활성화하기");
+		$(this).parent().css("background-color","lightblue");
+		$(this).parent().find("span").text("비활성화하기");
+	}
+		
+}
+
+function f_go9(){
+	fetch("문화체육관광부 대한민국역사박물관_근현대사 구술영상 목록정보_20241008.xml")
+		.then(response=>response.text())
+		.then(xmlString=>{
+			var xmlDoc = $.parseXML(xmlString); // String → Object로 변경
+			$(xmlDoc).find("DATA_RECORD").each((index,item)=>{
+				let subject = $(item).find("SUBJECT").text();
+				let info = $(item).find("DATA_COMMENT").text();
+				console.log(subject, info);
+			});
+		});
+}
+
+function f_go8(){
+	var xmlStr = `
+		<friends>
+			<friend>
+				<name>홍길동1</name>
+				<phone>010-1234-5678</phone>
+			</friend>
+			<friend>
+				<name>홍길동2</name>
+				<phone>010-1111-2222</phone>
+			</friend>
+			<friend>
+				<name>홍길동3</name>
+				<phone>010-3333-4444</phone>
+			</friend>
+		</friends>
+	`;
+	console.log(xmlStr);
+	var xmlDoc = $.parseXML(xmlStr);
+	console.log(xmlDoc);
+	$(xmlDoc).find("friend").each(function(index,item){
+		console.log($(item).find("name").text());
+		console.log($(item).find("phone").text());
+	});
+}
+
+function f_go7(){
+	$("p").eq(0).css("color","red");
+	$("p").eq(-1).css("color","red");
+	$("p").first().css("background-color","orange");
+	$("p").last().css("background-color","orange");
+}
+
+function f_go6(){
+	// end() 있으면 filter(":even")의 상위를 의미 $("h2")
+	// end() 없으면 filter(":even")중에서 filter(":odd") 홀수를 의미
+	$("h2").css("background-color","orange")
+		   .filter(":even").css("color","red").end()
+		   .filter(":odd").css("font-style","italic");
+}
+
+function f_go5(){
+	$("p:nth-of-type(even)").css("color","red");
+	$("p").filter(":nth-of-type(odd)").css("color","blue");
+	
+	// 모든 p들 중에서 3의 배수만 
+	$("p").filter(function(index){return index%3==0;})
+		  .css("border","5px dotted red");
+}
+
+function f_go4(){
+	var obj = {menu:"김밥"};
+	var obj2 = {price:5000, phone:"010-1234-5678"};
+	$.extend(obj,obj2,{address:"마포구 연남동"});
+	
+	var output = "";
+	$.each(obj, function(key, item){
+		output += `<p>${key}=${item}</p>`;
+	});
+	$("#here").html(output);
+}
+
+function f_go3(){
+	$("p:nth-of-type(2n)").addClass("high-light");
+}
+
+function f_go2(){
+	$("ul li a").each(function(index, item){
+		console.log(index,"번째", item);
+		console.log("content:" + $(item).text(), "속성:"+$(item).attr("href") );
+		console.log("--------------------------");
+	});
+}
+
+function f_go(){
+	var arr = [{name:"구글", link:"http://www.google.com"}];
+	arr.push({name:"네이버", link:"http://www.naver.com"});
+	arr.push({name:"다음", link:"http://www.daum.net"});
+	var output = "";
+	$.each(arr, function(index, item){
+		output += `<li><a href="${item.link}">${item.name}</a></li>`;
+	});
+	output = `<ul>${output}</ul>`;
+	$("#here").html(output);	
+}
+</script>
+<style>
+ p, h2 {
+ 	border: 1px solid green;
+ 	padding: 5px;
+ }
+ .high-light {
+ 	background-color: yellow;
+ 	font-weight: bold;
+ 	font-size: 20px;
+ }
+</style>
+</head>
+<body>
+<h1>jQuery 활용</h1>
+<button>배열1</button>
+<button>배열2</button>
+<button>addClass</button>
+<button>extend</button>
+<button>filter</button>
+<button>filter(end)</button>
+<button>위치(eq, first, last)</button>
+<button>XML파싱</button>
+<button>XML파싱(공공데이터)</button>
+<div>
+	<span>비활성화</span>
+	<button>활성화하기</button>
+</div>
+
+<hr>
+<p>p1</p> <!-- index:0 -->
+<p>p2</p> <!-- index:1 -->
+<p>p3</p> <!-- index:2 -->
+<p>p4</p> <!-- index:3 -->
+<p>p5</p> <!-- index:4 -->
+
+<hr>
+<h2>0</h2>
+<h2>1</h2>
+<h2>2</h2>
+<h2>3</h2>
+<h2>4</h2>
+<h2>5</h2>
+<h2>6</h2>
+
+<hr>
+<div id="here">여기</div>
+</body>
+</html>

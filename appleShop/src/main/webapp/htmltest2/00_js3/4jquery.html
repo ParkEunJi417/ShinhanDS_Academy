@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery 연습</title>
+<style>
+  img {
+     min-width: 150px;
+     min-height: 150px;
+     display: inline-block;
+  }
+  #here { 
+  	border: 3px solid black;
+  	padding: 10px;
+  }
+</style>
+<script src="jquery-3.7.1.min.js"></script>
+<script>
+
+$(f_init);
+function f_init(){
+	$("#btn1").click(f_do1);
+	$("#btn2").click(f_do2);
+	$("#btn3").click(f_do3);
+	$("#btn4").click(f_do4);
+	$("#btn5").click(f_do5);
+	$("#btn6").click(f_do6);
+	$("#btn7").click(f_do7);
+	$("#btn8").click(f_do8);
+	$("#btn9").click(f_do9);
+	$("#btn10").click(f_do10);
+	$("#btn11").click(f_do11);
+}
+
+function f_do11(){
+	var arr = ["../14_Ani/images/prod1.jpg","../14_Ani/images/prod2.jpg",
+		"../14_Ani/images/prod3.jpg","../14_Ani/images/sunset.jpg"];
+
+	var img1 = $("<img/>").attr({src:arr[0], alt:"prod1이미지", width:"150px"});
+	var img2 = $("<img/>").attr({src:arr[1], alt:"prod2이미지", width:"150px"});
+	var img3 = $("<img/>").attr({src:arr[2], alt:"prod3이미지", width:"150px"});
+	var img4 = $("<img/>").attr({src:arr[3], alt:"sunset이미지", width:"150px"});
+	
+	// 자식
+	$(img1).appendTo("#here");
+	$(img2).prependTo("#here");
+	
+	// 형제
+	$(img3).insertBefore("#here");
+	$(img4).insertAfter("#here");
+}
+
+function f_do10(){
+	$("#here").remove(); // 객체 지우기
+}
+
+function f_do9(){
+	$("#here").empty(); // 내용 지우기
+}
+
+function f_do8(){
+	$("h1").html(function(index,item){
+		return item+`<span>${index+1}</span>`;
+	});
+}
+
+function f_do7(){
+	var arr = ["lightgreen","lightblue","orange","pink"];
+	$("h1").css("backgroundColor",function(index){ return arr[index]; });
+}
+
+function f_do6(){
+	$("#here img").removeAttr("width");
+	$("#here img").removeAttr("height");
+}
+
+function f_do5(){
+	$("#here img").css("border", function(index){return (index+2)*2+"px dotted blue";});
+}
+
+function f_do4(){
+	var obj = {"width":function(index){ return 150*(index+1);}, 
+			   "height":function(index){ return 150*(index+1);}};	
+	$("#here img").attr(obj); 
+}
+
+function f_do3(){
+	//setter
+	$("#here img:nth-child(2)").css("border", "5px dotted red");	
+	var obj = {"width":"250px", "height":"250px"};	
+	$("#here img:nth-child(2)").attr(obj);
+}
+
+function f_do2(){
+	//setter
+	$("#here img:nth-child(1)").css("border", "5px dotted red");
+	$("#here img:nth-child(1)").attr("width", function(index){
+		                                         return 300*(index+1);
+		                                      }
+	                                );
+	$("#here img:nth-child(1)").attr("height", "250px");
+}
+function f_do1(){
+	//getter
+	var src1 = $("#here img:nth-child(1)").attr("src");
+	console.log(src1);	
+}
+</script>
+</head>
+<body>
+	<h1>jQuery 문서객체 조작</h1>
+	<h1>jQuery 문서객체 조작</h1>
+	<h1>jQuery 문서객체 조작</h1>
+	<h1>jQuery 문서객체 조작</h1>
+	<hr>
+	<button id="btn1">속성읽기1</button>
+	<button id="btn2">속성변경1번</button>
+	<button id="btn3">속성변경2번</button>
+	<button id="btn4">속성변경4(all)</button>
+	<button id="btn5">css변경(all)</button>
+	<button id="btn6">속성삭제(all)</button>
+	<button id="btn7">css변경(all)</button>
+	<button id="btn8">객체읽기/추가</button>
+	<button id="btn9">empty</button>
+	<button id="btn10">remove</button><br>
+	<button id="btn11">동적생성(앞,뒤,before,after)</button>
+	<hr>
+	<div id="here">
+		<img src="../08_BoxModel/images/bear.jpg" alt="곰" width="150px">
+		<img src="../08_BoxModel/images/cat.jpg" alt="고양이" width="150px">
+		<img src="../08_BoxModel/images/photo.jpg" alt="포토" width="150px">
+	</div>
+</body>
+</html>
