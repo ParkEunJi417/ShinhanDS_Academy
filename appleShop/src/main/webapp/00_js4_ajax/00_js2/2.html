@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ table, th, td {
+ 	border: 1px solid black;
+ 	border-collapse: collapse;
+ }
+</style>
+<script>
+	window.onload=f_initial;
+	var arr = [10,20,30,40,5];
+	
+	function f_initial(){
+		hereObj = document.querySelector("#here");
+		var btn1 = document.querySelector("button:nth-of-type(1)");
+		var btn2 = document.querySelector("button:nth-of-type(2)");
+		var btn3 = document.querySelector("button:nth-of-type(3)");
+		var btn4 = document.querySelector("button:nth-of-type(4)");
+		var btn5 = document.querySelector("button:nth-of-type(5)");
+		var btn6 = document.querySelector("button:nth-of-type(6)");
+		var btn7 = document.querySelector("button:nth-of-type(7)");
+		var btn8 = document.querySelector("button:nth-of-type(8)");
+		var btn9 = document.querySelector("button:nth-of-type(9)");
+		
+		btn1.addEventListener("click",f_call1);
+		btn2.addEventListener("click",f_call2);
+		btn3.addEventListener("click",f_call3);
+		btn4.addEventListener("click",f_call4);
+		btn5.addEventListener("click",f_call5);
+		btn6.addEventListener("click",f_call6);
+		btn7.addEventListener("click",f_call7);
+		btn8.addEventListener("click",f_call8);
+		btn9.addEventListener("click",f_call9);
+	}
+	
+	function f_call9(){
+		const options = {method: 'GET', headers: {accept: 'application/json'}};
+		fetch('https://api.bithumb.com/public/ticker/All', options)
+		  .then(response => response.json())
+		  .then(jsObj => {
+
+			  var title = `<tr><th>종목명</th>`;
+			  for(let prop in jsObj.data["BTC"]){
+				  title += `<th>${prop}</th>`;
+			  }
+			  title += `</tr>`;
+			  
+			  var result="";
+			  var today="";
+			  for(var prop in jsObj.data){
+				  if(prop == 'date') {
+					  today = new Date(parseInt(jsObj.data[prop])).toISOString();
+					  continue;
+				  }
+				  result +=`<tr><td>${prop}</td>`;
+				  
+				  for(var prop2 in jsObj.data[prop]){
+					  result += `<td>${jsObj.data[prop][prop2]}</td>`; 
+				  }
+				  result += `</tr>`;
+			  }
+			  var output = `
+					<table>
+					<tbody>
+					<caption>기준일:${today}</caption>
+						${title}
+						${result}
+					</tbody>
+					</table>`;
+			  hereObj.innerHTML = output;
+		   })
+		   .catch(err => console.error(err));
+	}
+	
+	function f_call8(){
+		const options = {method: 'GET', headers: {accept: 'application/json'}};
+		 
+		//response.json() == JSON.stringify() //"{}"
+		//JSON  ==> Object {키:"값"}
+		fetch('https://api.bithumb.com/v1/market/all?isDetails=false', options)
+		  .then(response => response.json())
+		  .then(response => {
+		   // 응답된 object를 접근해서 table로 출력하기
+		   var result="";
+		   for(let i in response){
+			   result += `
+			   <tr>
+			   	<td>${response[i].market}</td>
+			   	<td>${response[i]["korean_name"]}</td>
+			   	<td>${response[i]["english_name"]}</td>
+			   </tr>
+			   `;
+		   }
+		   var output = `
+				<table>
+				<tbody>
+					<tr>
+						<th>market</th>
+						<th>korean_name</th>
+						<th>english_name</th>
+					</tr>
+					${result}
+				</tbody>
+				</table>`;
+				
+			hereObj.innerHTML = output;
+		   })
+		   .catch(err => console.error(err));
+	}
+	
+	function f_call7(){
+		var str = '{"name":"홍길동", "age":20, "major":"컴공"}';
+		var obj = JSON.parse(str);
+		console.log(str);
+		console.log(obj);
+		hereObj.innerHTML = obj.name+":"+obj.age;
+		
+	}
+	
+	function f_call6(){
+		// JavaScript Object → Java or Django (서버 프로그램으로 전송)
+		var obj = {name:"홍길동", age:20, major:"컴공"};
+		
+		// JavaScript Object → 문자로 변경 : JSON(JavaScript Object Natation)
+		// JS Object형태의 문자열 {"name":"홍길동", "age":20, "major":"컴공"}
+		var str = JSON.stringify(obj);
+		hereObj.innerHTML = str;
+	}
+	
+	function f_call5(){
+		var result = arr.some(function(item,index){
+			return item==5;
+		});
+		hereObj.innerHTML = result;
+	}
+	
+	function f_call4(){
+		var result = arr.every(function(item,index){
+			return item%10==0;
+		});
+		hereObj.innerHTML = result;
+	}
+	
+	function f_call3(){
+		var arr2 = arr.filter(f_filter);
+		hereObj.innerHTML = `filter결과는 ${arr2}`;
+	}
+	
+	function f_filter(item){
+		return item%20==0;
+	}
+	
+	function f_call2(){
+		var output = "";
+		var arr2 = arr.map(function(item, index, arrObj){
+			return "변경값" + item/10;
+		});
+		hereObj.innerHTML = `
+			본래array:${arr}<br>
+			변형array:${arr2}
+		`;
+	}
+	
+	function f_call1(){
+		var output = "";
+		arr.forEach(function(element, index, arrObj){
+			output += `<p>${index}번째 값은 ${element} 전체는 ${arrObj}</p>`;
+			output += `<p>${arguments[1]}번째 값은 ${arguments[0]} 전체는 ${arguments[2]}</p><hr>`;
+		});
+		hereObj.innerHTML = output;
+	}
+	
+</script>
+</head>
+<body>
+	<!-- HTML은 구조적 web data -->
+	<h1>JavaScript 배열</h1>
+	<button>forEach</button>
+	<button>map</button>
+	<button>filter</button>
+	
+	<button>every</button>
+	<button>some</button>
+	<button>JSON 만들기(stringify)</button>
+	<button>JSON→jSObject만들기(parse)</button>
+	<button>빗썸</button>
+	<button>빗썸All</button>
+	<hr>
+	<div id="here">여기</div>
+</body>
+</html>

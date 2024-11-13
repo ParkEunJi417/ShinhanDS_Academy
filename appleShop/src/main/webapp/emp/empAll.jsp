@@ -42,7 +42,7 @@
 	tbody td:nth-child(7)[data-job='IT_PROG'] {
 		color: yellow;
 	}
-	caption {
+	h1, caption {
 		font-family: "Gaegu", sans-serif;
 		font-weight: 400;
 		font-style: normal;
@@ -137,7 +137,10 @@ function f_job(){
 			List<EmpDTO> emplist = eService.selectAllService();
 			for(EmpDTO emp:emplist){ %>
 				<tr>
-					<td><%=emp.getEmployee_id() %></td>
+					<td>
+						<a href="empDetail.jsp?empid=<%=emp.getEmployee_id() %>">
+						<%=emp.getEmployee_id() %></a>
+					</td>
 					<td data-fname="<%=emp.getFirst_name() %>"><%=emp.getFirst_name() %></td>
 					<td data-lname="<%=emp.getLast_name() %>"><%=emp.getLast_name() %></td>
 					<td><%=emp.getDepartment_id() %></td>

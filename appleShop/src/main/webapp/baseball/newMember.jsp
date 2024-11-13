@@ -29,6 +29,10 @@
   	}
   #input_insert { height: 40px; }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+</script>
 </head>
 <body>
 <a href="main.jsp">홈으로</a>
@@ -42,11 +46,11 @@
 			<label>이메일:</label><input type="email" id="person_email">
 		</div>
 	</div>
-	<div class="check">
-		<label id="check_err">추후 회원가입 실패사유</label>
-	</div>
 	<div class="insert">
 		<input type="submit" value="회원가입" id="input_insert">
+	</div>
+	<div class="check">
+		<label id="check_err">추후 회원가입 실패사유</label>
 	</div>
 	
 </form>

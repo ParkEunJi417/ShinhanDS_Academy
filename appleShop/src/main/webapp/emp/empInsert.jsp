@@ -57,7 +57,31 @@ List<JobDTO> joblist = eService.selectAllJobService();
   
   
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+	var isDupCheck = false;
+	
+	$(()=>{
+		$("#myfrm").on("submit",f_submit);
+	});
+	
+	function f_submit(event){
+		var empobj = $("input[name='employee_id']");
+		var empid = $(empobj).val();
+		if(empid >= 100) {
+			alert("신규 직원번호는 반드시 100보다 작아야합니다.");
+			event.preventDefault(); // default event취소(서버전송 중단)
+			$(empobj).val("");
+			$(empobj).focus();
+			return;
+		}
+		if(!isDupCheck){
+			alert("중복체크는 필수입니다.");
+			event.preventDefault();
+		}
+	}
+</script>
+<!-- <script>
 //고전 이벤트 모델 → 객체.이벤트 속성 = 이벤트 핸들러
   window.onload = function(){
 	
@@ -74,6 +98,56 @@ List<JobDTO> joblist = eService.selectAllJobService();
 		  
 	  };
   };
+</script> -->
+<script>
+$(()=>{
+	$("#btn_dup").on("click",f_dupCheck);
+	$("input[name='employee_id']").on("keyup",f_keyup);
+	$("#btn_goback").on("click", f_goback);
+});
+
+function f_goback(){
+	 var uri = $("#myfrm").serialize();
+	 //console.log(uri);
+	 $.ajax({
+		 url : `./empRegister.jsp?\${uri}`,
+		 type: "get",
+		 success : function(responseData){
+			 console.log(responseData);
+			 $("#resultPrint").html(responseData);
+		 },
+		 error:function(err){
+			 console.log(err);
+		 }
+	 });
+}
+
+function f_keyup(){
+	var len = $(this).val().length;
+	if(len > 0){
+		$("#btn_dup").removeAttr("disabled");
+	}
+	else {
+		$("#btn_dup").attr("disabled","disabled");
+	}
+}
+
+function f_dupCheck(){
+	$.ajax({
+		url:"empDupCheck.jsp",
+		type:"post",
+		data:{empid : $("input[name='employee_id']").val()},
+		success:function(responseData){
+			$("#here").text(responseData);
+			if(responseData.trim()=="사용불가한 직원번호입니다."){
+				$("input[name='employee_id']").val("").focus();
+				isDupCheck = false;
+			} else {
+				isDupCheck = true;
+			}
+		}
+	});
+}
 </script>
 </head>
 <body>
@@ -85,7 +159,10 @@ List<JobDTO> joblist = eService.selectAllJobService();
 <a href="empAll.jsp">직원조회</a>
 <h1>직원등록</h1>
 <form id="myfrm" action="empRegister.jsp" method="post">
-	<label>직원번호:</label><input class="required" type="number" name="employee_id"><br>
+	<label>직원번호:</label><input class="required" type="number" name="employee_id">
+	<input id="btn_dup" type="button" value="중복확인" disabled="disabled"></input>
+	<span id="here">ㅇㅇ</span>
+	<br>
 	<label>부서번호:</label>
 	
 	<select name="department_id">
@@ -124,8 +201,10 @@ List<JobDTO> joblist = eService.selectAllJobService();
 	</select><br>
 	<label>phone:</label><input type="text" name="phone_number"><br>
 	<label>입사일:</label><input class="required" type="date" name="hire_date"><br>
-	<input type="submit" value="직원저장" id="save">
+	<input type="submit" value="직원저장(submit서버전송go)">
+	<input id="btn_goback" type="button" value="직원저장(서버goback-Ajax)">
 </form>
+<div id="resultPrint"></div>
 </div>
 </body>
 </html>
