@@ -8,9 +8,13 @@
 $(document).ready(function() {
 	
 	//save버튼을 누르면 선택된 과일들의 값을 list에 나열합니다. (map, get, join)
-	
-	
-	
+	$("#save").on("click",function(){
+		var arr = $("#content .fruit:checked").map(function(index,item){
+			return $(item).val();
+		}).get();
+		var str = arr.join(",");
+		$("#list").html(str);
+	});	
 });
 </script>
 </head>

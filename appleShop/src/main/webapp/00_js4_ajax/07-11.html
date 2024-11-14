@@ -8,7 +8,7 @@
 $(document).ready(function() {
     $("input:disabled").css("border", "dashed 2px gray");
     $("#inquery").click(function() {
-		//?
+		var v = $("#food option:selected").text();
 		if (v =="") {
 			alert("음식 분류를 선택하셔야 합니다.");
 		} else {

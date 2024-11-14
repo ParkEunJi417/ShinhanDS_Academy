@@ -7,7 +7,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	//각각의 버튼을 클릭하면 버튼의 value을 보여준다...(js와 jq비교) 
-	
+	$("input").on("click",function(){
+		console.log($(this).val());
+		$("#b3").after($(this).val());
+	});
 });
 </script>
 </head>

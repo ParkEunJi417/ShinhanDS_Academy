@@ -14,7 +14,10 @@
 $(document).ready(function() {
 	//tbody내의 tr를 클릭했을때 data를 접근하기 
 	//alert("클릭된 국가 정보 => 번호 : " + no + ", 지역 : " +region);
-	 
+	$("tbody tr").on("click",function(){
+		var message = "번호 " + $(this).attr("data-no") + ", 지역 : "+ $(this).attr("data-region");
+		alert(message);
+	}); 
 });
 </script>
 </head>

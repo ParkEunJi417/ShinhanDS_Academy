@@ -10,8 +10,14 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function() {
 	//keyword input의 값이 입력되면 
+	$("#keyword").on("keyup", function(){
+		var inputData = $(this).val();
+		$("tbody tr").hide();
+		$(`#nations td:contains(${inputData})`).parent().show();
+	}); 
  
 });
 </script>

@@ -11,8 +11,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $("5의 배수인 tr").css("background-color", "aqua");
-    $("짝수번째 tr").css("font-weight", "bold");
+    $("tr:nth-of-type(5n)").css("background-color", "aqua");
+    $("tr:nth-of-type(2n)").css("font-weight", "bold");
 });
 </script>
 </head>

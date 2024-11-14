@@ -7,7 +7,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	//h1이 존재하는 div의 글씨는 italic으로 설정한다. 
-	 ??????????.css("font-style", "italic");
+	$("div").find("h1").each(function(){
+		$(this).css("font-style", "italic");
+	});
 });
 </script>
 </head>
