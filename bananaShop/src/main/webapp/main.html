@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+function f_get(){
+	$.ajax({
+		url:"first",
+		type:"get",
+		success:function(){
+			alert("get success");
+		},
+		error:function(){}
+	});
+}
+
+function f_post(){
+	$.ajax({
+		url:"first",
+		type:"post",
+		success:function(){
+			alert("post success");
+		},
+		error:function(){}
+	});
+}
+</script>
+</head>
+<body>
+<h1>Jsp Servlet 학습(❁´◡`❁)</h1>
+<ol>
+	<li>주소창에서 get요청</li>
+	<li>
+		<a href="/bananaShop/first">a태그이용 get요청(절대경로)</a>
+		<a href="first">a태그이용 get요청(상대경로)</a>
+		<a href="./first">a태그이용 get요청(상대경로)</a>
+		<a href="aa/first">a태그이용 get요청(상대경로)</a>
+		
+	</li>
+	<li>
+		<button onclick="location.href='first'">location이용 get요청</button>
+	<li>
+		<form action="first" method="get">
+			<input type="submit" value="form이용 get요청">
+		</form>
+	</li>
+	<li>
+		<form action="first" method="post">
+			<input type="submit" value="form이용 post요청">
+		</form>
+	</li>
+	<li>
+		<button onclick="f_get()">ajax-get요청</button>
+		<button onclick="f_post()">ajax-post요청</button>
+	</li>
+</ol>
+</body>
+</html>
