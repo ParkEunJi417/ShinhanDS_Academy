@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  $(function(){
+	  $("button:nth-of-type(1)").on("click",f1);
+	  //$("button:nth-of-type(2)").on("click",f2);
+	  $("button:nth-of-type(2)").on("click",f3);
+	  //$("#btnSave").on("click",f_save);
+	  $("#btnSave").on("click",f_save2);
+  });
+  
+  function f_save3(){
+	  var uri = $("form").serializeArray();
+	  var dataObj = {};
+	  for(let i in arr){
+		  dataObj[arr[i].name] = arr[i].value;
+	  }
+  }
+
+  function f_save2(){
+	  var uri = $("form").serialize();
+	  var dataObj = {};
+	  var arr = uri.split("&");
+	  for(let i=0;i<arr.length;i++){
+		  var arr2 = arr[i].split("=");
+		  dataObj[arr2[0]] = arr2[1];
+	  }
+	  
+	  $.ajax({
+		  url:"../dept/deptRegister.jsp",
+		  type:"get",
+		  data:$("form").serialize(),
+		  success:function(responseHTML){
+			  $("#here").html(responseHTML);
+		  },
+		  error:function(){}
+	  });
+  }
+  
+  function f_save(){
+	  $.ajax({
+		  url:"../dept/deptRegister.jsp",
+		  type:"get",
+		  data:$("form").serialize(),
+		  success:function(responseHTML){
+			  $("#here").html(responseHTML);
+		  },
+		  error:function(){}
+	  });
+  }
+  
+  function f3(){
+	  var url = "../emp/empDetail.jsp";
+	  var data = { empid : $("#empid").val() };
+	  console.log(url);
+	  console.log(data);
+	  $.ajax({
+		  url:url,
+		  type:"get",
+		  data:data,
+		  success:function(result){
+			  $("#here").html(result);
+		  },
+		  error:function(err){}
+	  });
+  }
+  
+  function f2(){
+	  var url = "../emp/empDetail.jsp?empid="+$("#empid").val();
+	  console.log(url);
+	  $.ajax({
+		  url:url,
+		  type:"get",
+		  success:function(result){
+			  $("#here").html(result);
+		  },
+		  error:function(err){}
+	  });
+  }
+  
+  function f1(){
+	  $.ajax({
+		  url:"../emp/empAll.jsp",
+		  type:"get",
+		  success:function(responseData){
+			  $("#here").html(responseData);
+		  },
+		  error:function(err){
+			  alert(err);
+		  }
+	  });
+  }
+</script>
+</head>
+<body>
+<h1>Ajax(비동기통신)--jQuery이용</h1>
+<button>직원조회</button><br>
+<input id="empid" value="100">
+<button>직원상세</button>
+<hr>
+<div>
+	<form action="../dept/deptRegister.jsp">
+		부서id : <input type="text" name="department_id" value="11"><br>
+		부서name : <input type="text" name="department_name" value="신한DS"><br>
+		mid : <input type="text" name="manager_id" value="100"><br>
+		location id : <input type="text" name="location_id" value="1700"><br>
+		<input type="submit" value="서버전송(submit)">
+		<input type="button" id="btnSave" value="서버전송(button)">
+	</form>
+</div>
+<div id="here">여기</div>
+</body>
+</html>
