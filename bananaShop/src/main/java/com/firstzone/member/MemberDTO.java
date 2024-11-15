@@ -1,6 +1,4 @@
-package com.firstzone.dept;
-
-import java.sql.Date;
+package com.firstzone.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,13 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter@Setter@ToString
-public class DeptDTO {
-	int department_id;
-	String department_name;
-	int manager_id;
-	int location_id;
+@Getter
+@Setter
+@Builder
+@ToString
+public class MemberDTO {
+	String member_id;
+	String member_pass;
+	String member_name;
+	String member_email;
 }

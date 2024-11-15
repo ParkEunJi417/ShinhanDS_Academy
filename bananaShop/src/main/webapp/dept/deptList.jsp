@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  table, th, tr, td {
+  	border: 1px solid gray;
+  	border-collapse: collapse;
+  	text-align: center;
+  	padding: 5px;
+  }
+  th { background-color: lightgray; }
+</style>
+</head>
+<body>
+<table>
+	<tr>
+		<th>부서번호</th>
+		<th>부서이름</th>
+		<th>부서장</th>
+		<th>지역번호</th>
+	</tr>
+
+	<c:forEach items="${deptDatas}" var="dept">
+		<tr>
+			<td>${dept.department_id}</td>
+			<td>${dept.department_name}</td>
+			<td>${dept.manager_id}</td>
+			<td>${dept.location_id}</td>
+		</tr>
+	</c:forEach>
+</table>
+</body>
+</html>

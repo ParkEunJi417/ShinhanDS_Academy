@@ -15,7 +15,9 @@ import com.firstzone.emp.EmpDTO;
 import com.firstzone.emp.EmpService;
 
 /**
- * Servlet implementation class EmpListServlet
+ * Servlet : 사용자의 요청을 받아서 처리가능한 서버에서 실행되는 자바 class
+ * HttpServlet : http프로토콜 처리가능
+ * @WebServlet : 사용자의 요청 주소 정의 → ※주의:반드시 / 로 시작
  */
 @WebServlet("/emp/emplist.do")
 public class EmpListServlet extends HttpServlet {
