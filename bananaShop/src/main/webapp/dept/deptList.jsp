@@ -27,10 +27,11 @@
 
 	<c:forEach items="${deptDatas}" var="dept">
 		<tr>
-			<td>${dept.department_id}</td>
+			<td><a href="detail.do?deptid=${dept.department_id}">${dept.department_id}</a></td>
 			<td>${dept.department_name}</td>
 			<td>${dept.manager_id}</td>
 			<td>${dept.location_id}</td>
+			<td><button onclick="location.href='delete.do?deptid=${dept.department_id}'">삭제</button></td>
 		</tr>
 	</c:forEach>
 </table>

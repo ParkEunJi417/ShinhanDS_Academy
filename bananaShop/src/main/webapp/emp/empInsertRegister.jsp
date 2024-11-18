@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="3;url=select.do">
 <title>Insert title here</title>
 </head>
 <body>

@@ -12,7 +12,7 @@ import java.util.List;
 import com.shinhan.util.DBUtil;
 
 public class DeptDAO {
-	String sql_selectAll = "select * from departments";
+	String sql_selectAll = "select * from departments order by department_id";
 	String sql_selectById = "select * from departments where department_id=?";
 	String sql_insert = "insert into departments values(?,?,?,?)";
 	String sql_update = """

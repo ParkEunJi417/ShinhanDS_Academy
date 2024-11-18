@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+table, tr, td, th { border:1px solid black; }
+</style>
 </head>
 <body>
 	<h1>직원List</h1>
@@ -23,13 +26,19 @@
 			<th>salary</th>
 			<th>hiredate</th>
 			<th>manager</th>
+			<th>Get</th>
+			<th>Post</th>
 		</tr>
 		
 		<%-- ${} : getAttribute()라는 의미 --%>
 		<c:forEach items="${empDatas}" var="emp">
 			<tr>
-			<td>${emp.employee_id}</td>
-			<td>${emp.first_name}</td>
+			<td>
+				<a href="detail.do?empid=${emp.employee_id}">${emp.employee_id}</a>	
+			</td>
+			<td>
+				<a href="detail.do?empid=${emp.employee_id}">${emp.first_name}</a>	
+			</td>
 			<td>${emp.last_name}</td>
 			<td>${emp.department_id}</td>
 			<td>${emp.email}</td>
@@ -39,6 +48,13 @@
 			<td>${emp.salary}</td>
 			<td>${emp.hire_date}</td>
 			<td>${emp.manager_id}</td>
+			<td><button onclick="location.href='delete.do?empid=${emp.employee_id}'">삭제</button></td>
+			<td>
+				<form action="delete.do" method="post">
+					<input type="hidden" value="${emp.employee_id}" name="empid">
+					<button>삭제</button>
+				</form>
+			</td>
 			</tr>
 		</c:forEach>
 	</table>
