@@ -20,49 +20,54 @@ body {
 	color: #23004d;
 }
 
+h2 {
+	font-family: "KBO_medium", sans-serif;
+}
+
 label {
-	width: 30px;
 	height: 26px;
 	display: inline-block;
-	text-align: right;
 	margin-right: 5px;
 	padding: 3px;
+	box-sizing: content-box;
 }
 
-a {
-	text-decoration: none;
-}
-
-.header, div a, #menu {
+form div, h2, .new, .header {
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 }
 
-.info, .login {
-	height: 65px;
-	display: inline-block;
+.mt-3 {
+	width: 50%;
 }
 
-.login {
-	margin-left: 5px;
-	align-content: center;
+.mb-3 {
+	width: 400px;
 }
 
-.input {
-	height: 20px;
-}
-
-#menu div {
-	display: inline-block;
-	border: 2px solid #23004d;
-	margin: 5px;
-	padding: 3px;
-}
-
-#kbo {
+.form-control {
 	width: 200px;
-	height: auto;
+}
+
+.input-group-text {
+	width: 95px;
+}
+
+.span-at {
+	width: 40px;
+}
+
+.new a:hover {
+	cursor: pointer;
+}
+
+.header {
+	margin-top: 20px;
+}
+
+.header img, label:hover {
+	cursor: pointer;
 }
 
 #header {
@@ -73,6 +78,11 @@ a {
 	font-style: normal;
 }
 
-#login {
-	height: 60px;
+#log-in {
+	color: black;
+}
+
+#kbo {
+	width: 200px;
+	height: auto;
 }

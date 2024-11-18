@@ -20,59 +20,66 @@ body {
 	color: #23004d;
 }
 
+h2 {
+	font-family: "KBO_medium", sans-serif;
+}
+
 label {
-	width: 30px;
 	height: 26px;
 	display: inline-block;
-	text-align: right;
 	margin-right: 5px;
 	padding: 3px;
+	box-sizing: content-box;
 }
 
-a {
-	text-decoration: none;
-}
-
-.header, div a, #menu {
+form div, h2, .new, .header {
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 }
 
-.info, .login {
-	height: 65px;
-	display: inline-block;
+.mt-3 {
+	width: 50%;
 }
 
-.login {
-	margin-left: 5px;
-	align-content: center;
+.mb-3 {
+	width: 300px;
 }
 
-.input {
-	height: 20px;
-}
-
-#menu div {
-	display: inline-block;
-	border: 2px solid #23004d;
-	margin: 5px;
-	padding: 3px;
-}
-
-#kbo {
+.form-control {
 	width: 200px;
-	height: auto;
+}
+
+.input-group-text {
+	width: 80px;
+}
+
+.new a:hover {
+	cursor: pointer;
+}
+
+.header {
+	margin-top: 20px;
+}
+
+.header img, label:hover {
+	cursor: pointer;
 }
 
 #header {
 	width: 300px;
+	height: 72.34px;
 	text-align: left;
 	font-family: "KBO_bold", sans-serif;
 	font-size: 2rem;
 	font-style: normal;
 }
 
-#login {
-	height: 60px;
+#sign-up {
+	color: black;
+}
+
+#kbo {
+	width: 200px;
+	height: auto;
 }
