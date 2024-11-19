@@ -12,6 +12,10 @@ table, tr, td, th { border:1px solid black; }
 </style>
 </head>
 <body>
+<%-- 	<p>로그인한 Member정보 request▶${loginMember1}</p> --%>
+	<p>로그인한 Member정보 session▶${loginMember2}</p>
+<%-- 	<p>로그인한 Member정보 context▶${loginMember3}</p> --%>
+	<hr>
 	<h1>직원List</h1>
 	<table>
 		<tr>

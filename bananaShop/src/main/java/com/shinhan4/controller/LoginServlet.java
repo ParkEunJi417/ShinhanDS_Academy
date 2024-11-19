@@ -6,11 +6,14 @@ import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.firstzone.member.MemberDTO;
 import com.firstzone.member.MemberService;
@@ -77,10 +80,35 @@ public class LoginServlet extends HttpServlet {
 		
 		if(member == null) {
 			message = "아이디가 존재하지 않습니다.";
+			response.sendRedirect("login.do?message="+message);
+			return;
 		} else if(member.getMember_id().equals("-1")) {
 			message = "비밀번호가 틀렸습니다.";
+			response.sendRedirect("login.do?message="+message);
+			return;
 		} else {
 			message = member.getMember_name()+"님 환영합니다.";
+			
+			// 로그인 성공시 로그인한 Member정보를 저장
+			// 1.context
+			ServletContext app = getServletContext();
+			app.setAttribute("loginMember3", member);
+			
+			// 2.session
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMember2", member);
+			
+			// 3.request
+			request.setAttribute("loginMember1", member);
+			
+			// 쿠키에 저장하기
+			Cookie cookie_id = new Cookie("loginId",member.getMember_id());
+			Cookie cookie_name = new Cookie("loginName",member.getMember_name());
+			Cookie cookie_email = new Cookie("loginEmail",member.getMember_email());
+			
+			response.addCookie(cookie_id);
+			response.addCookie(cookie_name);
+			response.addCookie(cookie_email);
 		}
 		
 //		response.setContentType("text/html;charset=utf-8");

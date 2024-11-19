@@ -17,6 +17,7 @@
 </style>
 </head>
 <body>
+<h2>부서 등록</h2>  
 <table>
 	<tr>
 		<th>부서번호</th>

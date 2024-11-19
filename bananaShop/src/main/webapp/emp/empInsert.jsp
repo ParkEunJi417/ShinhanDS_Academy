@@ -20,7 +20,6 @@
   </script>
 </head>
 <body>
-
 <div class="container mt-3">
   <h2>신규 직원 등록</h2>  
   <form action="insert.do" method="post">

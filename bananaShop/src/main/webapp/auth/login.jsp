@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<p>${param.message}</p>
 <h1>Sign In</h1>
  <%-- HTML, JSP : http://localhost:9090
 	상대경로 : login.do 
