@@ -15,12 +15,31 @@
 	window.onload = f_init;
 	
 	function f_init(){
+		document.querySelector('#domainTxt').disabled = true;
 		document.querySelector('#log-in').addEventListener('click', function() {
 		      window.location.href = 'login.do';
 		    });
 		document.querySelector('.header').addEventListener('click', function() {
 		      window.location.href = 'main.jsp';
 		    });
+		document.querySelector('#insert').addEventListener('click', checkValidation);
+		
+	}
+	
+	function checkValidation(){
+		const forms = document.querySelectorAll('.needs-validation');
+
+		  // Loop over them and prevent submission
+		  Array.from(forms).forEach(form => {
+		    form.addEventListener('submit', event => {
+		      if (!form.checkValidity()) {
+		        event.preventDefault();
+		        event.stopPropagation();
+		      }
+
+		      form.classList.add('was-validated');
+		    }, false)
+		  });
 	}
 	
 	function formatPhoneNumber(input) {
@@ -47,6 +66,7 @@
 		  // input 내용 초기화 & 입력 가능하도록 변경
 		  document.querySelector('#domainTxt').value = "";
 		  document.querySelector('#domainTxt').disabled = false;
+		  document.querySelector('#domainTxt').required=true;
 		}
 	}
 </script>
@@ -59,41 +79,62 @@
 	</div>
 	<div class="container mt-3">
   <h2>회원가입</h2>  
-  <form action="" method="post">
+  <form action="" method="post" class="row g-3 needs-validation" novalidate>
 	<div>
 		<div class="input-group mb-3">
 			<span class="input-group-text">아이디</span>
-			<input type="text" required="required" class="form-control" name="person_id" >
-		</div>
+			<input type="text" required="required" class="form-control" name="person_id"
+			 maxlength="20" placeholder="최대 20자">
+			<div class="invalid-feedback">
+	          아이디를 입력해주세요
+	        </div>
+		</div>        
 	</div>
 	<div>
 		<div class="input-group mb-3">
 			<span class="input-group-text">패스워드</span>
-			<input type="password" required="required" class="form-control" name="person_pw" >
+			<input type="password" required="required" class="form-control" name="person_pw"
+			 maxlength="20" placeholder="최대 20자">
+			<div class="invalid-feedback">
+	          패스워드를 입력해주세요
+	        </div>
 		</div>
 	</div>
 	<div>
 		<div class="input-group mb-3">
 			<span class="input-group-text">핸드폰번호</span>
 			<input type="text" required="required" class="form-control" name="person_phone"
-			  placeholder="010-1234-5678" maxlength="13" oninput="formatPhoneNumber(this)">
+			  maxlength="13" oninput="formatPhoneNumber(this)">
+			<div class="invalid-feedback">
+	          핸드폰번호를 입력해주세요
+	        </div>  
 		</div>
 	</div>
 	<div>
 		<div class="input-group mb-3">
-			<input type="text" class="form-control" placeholder="이메일">
+			<input type="text" required="required" class="form-control" placeholder="이메일">
 			<span class="input-group-text span-at">@</span>
 			<input type="text" class="form-control" id="domainTxt" name="person_email">
-			<select class="form-select" id="domainList" onchange="toggleInput(event)">
-			    <option value="naver.com">naver.com</option>
-			    <option value="gmail.com">gmail.com</option>
-			    <option selected value="custom">직접입력</option>
-			</select>
-			
+			<div class="invalid-feedback">
+		      이메일을 입력해주세요
+		    </div>
 		</div>
 	</div>
 	<div>
-		<button type="submit" class="btn btn-primary">회원가입</button>
+		<div class="input-group mb-3">
+			<select required="required" class="form-select" id="domainList" onchange="toggleInput(event)">
+			    <option value="" selected disabled>주소선택</option>
+			    <option value="naver.com">naver.com</option>
+			    <option value="gmail.com">gmail.com</option>
+			    <option value="custom">직접입력</option>
+			</select>
+			<div class="invalid-feedback">
+		      이메일 주소를 선택해주세요
+		    </div>
+		</div>
+	</div>
+	<div>
+		<button type="submit" class="btn btn-primary" id="insert">회원가입</button>
 	</div>
   </form>
   <div class="new">
