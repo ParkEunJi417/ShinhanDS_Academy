@@ -19,60 +19,50 @@ body {
 	font-family: "KBO_light", sans-serif;
 	color: #23004d;
 }
-
-label {
-	width: 30px;
+label{
 	height: 26px;
 	display: inline-block;
-	text-align: right;
-	margin-right: 5px;
 	padding: 3px;
+	line-height: 26px;
 }
 
 a {
 	text-decoration: none;
+	display: inline-block;
+	height: 26px;
+	padding: 3px;
+	line-height: 26px;
 }
 
-.header, div a, #menu {
+.div-header, #div-menu, #div-login, #div-logout {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.info, .login {
-	height: 65px;
-	display: inline-block;
-}
-
-.login {
-	margin-left: 5px;
-	align-content: center;
-}
-
-.input {
-	height: 20px;
-}
-
-#menu div {
+#div-menu div {
 	display: inline-block;
 	border: 2px solid #23004d;
 	margin: 5px;
 	padding: 3px;
 }
 
-#kbo {
+#img-kbo {
 	width: 200px;
 	height: auto;
 }
 
-#header {
-	width: 300px;
+#label-header {
+	width: 260px; 
 	text-align: left;
 	font-family: "KBO_bold", sans-serif;
 	font-size: 2rem;
 	font-style: normal;
 }
-
-#login {
-	height: 60px;
+#label-id {
+	text-align: center;
 }
+
+/* #a-login {
+	height: 60px;
+} */

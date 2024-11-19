@@ -5,22 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>야구 직관</title>
+<title>⚾야구 직관🥎</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="${path}/css/login.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-	window.onload = f_init;
-	
+	$(f_init);
+
 	function f_init(){
-		document.querySelector('#sign-up').addEventListener('click', function() {
-		      window.location.href = 'newMember.jsp';
-		    });
-		document.querySelector('.header').addEventListener('click', function() {
-		      window.location.href = 'main.jsp';
-		    });
+		$('#sign-up').on('click', function() { window.location.href = 'newMember.jsp'; });
+		$('.header').on('click', function() { window.location.href = 'main.jsp'; });
 	}
 </script>
 </head>
@@ -32,7 +29,7 @@
 	</div>
 	<div class="container mt-3">
 	  <h2>로그인</h2> 
-	  <form action="" method="post">
+	  <form action="login.do" method="post">
 		  <div>
 		  	<div class="input-group mb-3">
 		      <span class="input-group-text">아이디</span>
@@ -42,11 +39,14 @@
 		  <div>
 		  	<div class="input-group mb-3">
 		      <span class="input-group-text">패스워드</span>
-		      <input type="text" required="required" class="form-control" name="person_pw" >
+		      <input type="password" required="required" class="form-control" name="person_pw" >
 		    </div>
 		  </div>
 		  <div>
-		  	<button type="submit" class="btn btn-primary">로그인</button>
+		  	<button type="submit" class="btn btn-primary" id="login">로그인</button>
+		  </div>
+		  <div>
+			<span id="error-message">${param.message}</span>
 		  </div>
 	  </form>
 	  <div class="new">

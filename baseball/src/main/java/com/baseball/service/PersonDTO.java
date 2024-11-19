@@ -1,4 +1,4 @@
-package com.pej.baseball;
+package com.baseball.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

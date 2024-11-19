@@ -1,4 +1,4 @@
-package com.pej.baseball;
+package com.baseball.service;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.baseball.util.DBUtil;
 
 public class BaseballDAO {
 	Connection conn;
@@ -61,18 +63,28 @@ public class BaseballDAO {
 
 	// 로그인
 	public PersonDTO loginMember(String person_id, String person_pw) {
-		String sql = "select * from person where person_id=? and person_pw=?";
+		String sql = "select * from person where person_id=?";
 		conn = DBUtil.getConnection();
 		PersonDTO person = null;
 
 		try {
 			st = conn.prepareStatement(sql);
 			st.setString(1, person_id);
-			st.setString(2, person_pw);
 			rs = st.executeQuery();
 
-			if (rs.next()) {
-				person = makePerson(rs);
+			if(rs.next()) {
+				String getPass = rs.getString("person_pw");
+				if(person_pw.equals(getPass)) {
+					person = PersonDTO.builder()
+									  .person_id(person_id)
+									  .person_pw(person_pw)
+									  .build();
+				} else {
+					person = PersonDTO.builder()
+									  .person_id(person_id)	
+									  .person_pw("-1")
+									  .build();
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,12 +1,12 @@
-<%@page import="com.pej.baseball.BaseballService"%>
-<%@page import="com.pej.baseball.PersonDTO"%>
+<%@page import="com.baseball.service.BaseballService"%>
+<%@page import="com.baseball.service.PersonDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>⚾야구 직관🥎</title>
 <style>
   h1, a {
   	display: flex;

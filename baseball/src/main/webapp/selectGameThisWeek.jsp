@@ -1,5 +1,5 @@
-<%@page import="com.pej.baseball.RecordGameDTO"%>
-<%@page import="com.pej.baseball.BaseballService"%>
+<%@page import="com.baseball.service.RecordGameDTO"%>
+<%@page import="com.baseball.service.BaseballService"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이번주 야구일정</title>
+<title>⚾야구 직관🥎</title>
 <style>
 * {
 	font-family: "맑은 고딕";

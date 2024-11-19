@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>야구 직관</title>
+<title>⚾야구 직관🥎</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +16,7 @@
 	
 	function f_init(){
 		document.querySelector('#log-in').addEventListener('click', function() {
-		      window.location.href = 'login.jsp';
+		      window.location.href = 'login.do';
 		    });
 		document.querySelector('.header').addEventListener('click', function() {
 		      window.location.href = 'main.jsp';

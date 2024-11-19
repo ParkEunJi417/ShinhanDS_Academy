@@ -1,4 +1,4 @@
-package com.pej.baseball;
+package com.baseball.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

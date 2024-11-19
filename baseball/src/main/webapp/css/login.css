@@ -25,7 +25,7 @@ h2 {
 }
 
 label {
-	height: 26px;
+	height: 40px;
 	display: inline-block;
 	margin-right: 5px;
 	padding: 3px;
@@ -52,6 +52,7 @@ form div, h2, .new, .header {
 
 .input-group-text {
 	width: 80px;
+	display: inline;
 }
 
 .new a:hover {
@@ -67,8 +68,7 @@ form div, h2, .new, .header {
 }
 
 #header {
-	width: 300px;
-	height: 72.34px;
+	width: 260px;
 	text-align: left;
 	font-family: "KBO_bold", sans-serif;
 	font-size: 2rem;
@@ -82,4 +82,8 @@ form div, h2, .new, .header {
 #kbo {
 	width: 200px;
 	height: auto;
+}
+
+#error-message {
+	color: red;
 }
