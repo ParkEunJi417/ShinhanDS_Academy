@@ -7,8 +7,8 @@ public class BaseballService {
 	BaseballDAO bbDAO = new BaseballDAO();
 
 	// 회원가입
-	public int insertMember(PersonDTO bb) {
-		return bbDAO.insertMember(bb);
+	public int insertPerson(PersonDTO bb) {
+		return bbDAO.insertPerson(bb);
 	}
 
 	// 기가입자 확인
@@ -17,8 +17,8 @@ public class BaseballService {
 	}
 
 	// 로그인
-	public PersonDTO loginMember(String person_id, String person_pw) {
-		return bbDAO.loginMember(person_id, person_pw);
+	public PersonDTO loginPerson(String person_id, String person_pw) {
+		return bbDAO.loginPerson(person_id, person_pw);
 	}
 	
 	// 이번주 야구일정

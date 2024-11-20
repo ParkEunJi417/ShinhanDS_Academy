@@ -17,13 +17,14 @@
 
 body {
 	font-family: "KBO_light", sans-serif;
-	color: #23004d;
+	color: #002561;
 }
 label{
 	height: 26px;
 	display: inline-block;
 	padding: 3px;
 	line-height: 26px;
+	box-sizing: content-box;
 }
 
 a {
@@ -32,9 +33,14 @@ a {
 	height: 26px;
 	padding: 3px;
 	line-height: 26px;
+	color: #002561;
 }
 
-.div-header, #div-menu, #div-login, #div-logout {
+a:click {
+	font-weight: bold;
+}
+
+#div-header, #div-menu, #div-login, #div-logout {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -42,7 +48,7 @@ a {
 
 #div-menu div {
 	display: inline-block;
-	border: 2px solid #23004d;
+	border: 2px solid #002561;
 	margin: 5px;
 	padding: 3px;
 }

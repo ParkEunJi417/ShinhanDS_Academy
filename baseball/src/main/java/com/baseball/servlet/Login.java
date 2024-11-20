@@ -20,11 +20,11 @@ import com.baseball.service.PersonDTO;
  * Servlet implementation class login
  */
 @WebServlet("/login.do")
-public class login extends HttpServlet {
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/login.jsp");
 		rd.forward(request, response);
 	}
 
@@ -36,7 +36,7 @@ public class login extends HttpServlet {
 		BaseballService bService = new BaseballService();
 		String id = request.getParameter("person_id");
 		String pw = request.getParameter("person_pw");
-		PersonDTO person = bService.loginMember(id, pw);
+		PersonDTO person = bService.loginPerson(id, pw);
 		String message = "";
 		
 		if(person == null) {
@@ -44,8 +44,8 @@ public class login extends HttpServlet {
 			response.sendRedirect("login.do?message="+message);
 			return;
 		} else if(person.getPerson_pw().equals("-1")) {
-			message = URLEncoder.encode("비밀번호가 틀렸습니다.","utf-8");
-			response.sendRedirect("login.do?message="+message);
+			message = URLEncoder.encode("패스워드가 틀렸습니다.","utf-8");
+			response.sendRedirect("login.do?message="+message+"&id="+id);
 			return;
 		} else {
 			message = person.getPerson_id()+"님 환영합니다.";

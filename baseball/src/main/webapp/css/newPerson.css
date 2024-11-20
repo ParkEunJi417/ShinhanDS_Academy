@@ -17,7 +17,7 @@
 
 body {
 	font-family: "KBO_light", sans-serif;
-	color: #23004d;
+	color: #002561;
 }
 
 h2 {
@@ -32,7 +32,7 @@ label {
 	box-sizing: content-box;
 }
 
-form div, h2, .new, .header {
+form div, h2, #div-new, #div-header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -59,19 +59,15 @@ form div, h2, .new, .header {
 	width: 40px;
 }
 
-.new a:hover {
-	cursor: pointer;
-}
-
-.header {
+#div-header {
 	margin-top: 20px;
 }
 
-.header img, label:hover {
+#img-kbo, label:hover {
 	cursor: pointer;
 }
 
-#header {
+#label-header {
 	width: 260px;
 	text-align: left;
 	font-family: "KBO_bold", sans-serif;
@@ -79,11 +75,11 @@ form div, h2, .new, .header {
 	font-style: normal;
 }
 
-#log-in {
+#a-login {
 	color: black;
 }
 
-#kbo {
+#img-kbo {
 	width: 200px;
 	height: auto;
 }

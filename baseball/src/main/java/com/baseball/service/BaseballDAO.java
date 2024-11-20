@@ -17,7 +17,7 @@ public class BaseballDAO {
 	int result;
 
 	// DB에 회원 정보입력
-	public int insertMember(PersonDTO bb) {
+	public int insertPerson(PersonDTO bb) {
 		String sql = "insert into person values(?,?,?,?)";
 		conn = DBUtil.getConnection();
 
@@ -62,7 +62,7 @@ public class BaseballDAO {
 	}
 
 	// 로그인
-	public PersonDTO loginMember(String person_id, String person_pw) {
+	public PersonDTO loginPerson(String person_id, String person_pw) {
 		String sql = "select * from person where person_id=?";
 		conn = DBUtil.getConnection();
 		PersonDTO person = null;
@@ -333,18 +333,6 @@ public class BaseballDAO {
 			DBUtil.dbDisconnect(conn, st, null);
 		}
 		return result;
-	}
-
-	// 회원(Person) DTO
-	private static PersonDTO makePerson(ResultSet rs) throws SQLException {
-		PersonDTO person = new PersonDTO();
-
-		person.setPerson_id(rs.getString("person_id"));
-		person.setPerson_pw(rs.getString("person_pw"));
-		person.setPerson_phone(rs.getString("person_phone"));
-		person.setPerson_email(rs.getString("person_email"));
-
-		return person;
 	}
 
 	// 경기(Game) DTO
