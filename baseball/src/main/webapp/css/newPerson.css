@@ -24,15 +24,7 @@ h2 {
 	font-family: "KBO_medium", sans-serif;
 }
 
-label {
-	height: 40px;
-	display: inline-block;
-	margin-right: 5px;
-	padding: 3px;
-	box-sizing: content-box;
-}
-
-form div, h2, #div-new, #div-header {
+form div, h2, #div-login, #div-header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -42,7 +34,7 @@ form div, h2, #div-new, #div-header {
 	width: 50%;
 }
 
-.mb-3 {
+.mb-2 {
 	width: 400px;
 }
 
@@ -59,6 +51,29 @@ form div, h2, #div-new, #div-header {
 	width: 40px;
 }
 
+.block {
+	display: block;
+}
+
+.none {
+	display: none;
+}
+
+#div-showPw {
+	display: block;
+	width: 100%;
+}
+
+#div-login {
+	margin-top: 5px;
+}
+
+#div-usingId {
+	width: 100%;
+	color:#dc3545;
+	font-size: 14px;
+}
+
 #div-header {
 	margin-top: 20px;
 }
@@ -69,14 +84,20 @@ form div, h2, #div-new, #div-header {
 
 #label-header {
 	width: 260px;
+	height: 40px;
 	text-align: left;
 	font-family: "KBO_bold", sans-serif;
 	font-size: 2rem;
 	font-style: normal;
+	display: inline-block;
+	margin-right: 5px;
+	padding: 3px;
+	box-sizing: content-box;
 }
 
 #a-login {
 	color: black;
+	text-underline-offset: 4px;
 }
 
 #img-kbo {

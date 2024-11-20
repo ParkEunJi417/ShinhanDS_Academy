@@ -55,9 +55,9 @@ form div, h2, #div-new, #div-header {
 	display: inline;
 }
 
-/* #div-new a:hover {
-	cursor: pointer;
-} */
+#div-new {
+	margin-top: 5px;
+}
 
 #div-header {
 	margin-top: 20px;
@@ -77,6 +77,7 @@ form div, h2, #div-new, #div-header {
 
 #a-signUp {
 	color: black;
+	text-underline-offset: 4px;
 }
 
 #img-kbo {

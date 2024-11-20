@@ -2,18 +2,107 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <link href="${path}/css/newPerson.css" rel="stylesheet">
+</head>
+<body>
+<div>
+	<div id="div-header">
+			<img id="img-kbo" src="images/KBO.png" alt="KBO">
+			<label id="label-header">야구 직관 프로그램</label>
+	</div>
+	<div class="container mt-3">
+  <h2>회원가입</h2>  
+  <form action="" method="post" class="row g-3 needs-validation" novalidate>
+	<div>
+		<div class="input-group mb-2">
+			<span class="input-group-text">아이디</span>
+			<input type="text" required="required" class="form-control" name="person_id"
+			 maxlength="20" placeholder="최대 20자" id="input-id">
+			<div class="invalid-feedback">
+	          아이디를 입력해주세요
+	        </div>
+	        <div id="div-usingId">
+	          사용중인 아이디입니다
+	        </div>
+		</div>
+	</div>
+	<div>
+		<div class="input-group mb-2">
+			<span class="input-group-text">패스워드</span>
+			<input type="password" required="required" class="form-control" name="person_pw"
+			 maxlength="20" placeholder="최대 20자" id="input-pw">
+			<div id="div-showPw">
+			 	<input class="form-check-input" type="checkbox" id="input-showPw">
+			 	<label for="input-showPw">패스워드 표시</label>
+			</div>
+			<div class="invalid-feedback">
+	          패스워드를 입력해주세요
+	        </div>
+		</div>
+	</div>
+	<div>
+		<div class="input-group mb-2">
+			<span class="input-group-text">핸드폰번호</span>
+			<input type="text" required="required" class="form-control" name="person_phone"
+			  maxlength="13" placeholder="010-1234-5678" id="input-phone">
+			<div class="invalid-feedback">
+	          핸드폰번호를 입력해주세요
+	        </div>  
+		</div>
+	</div>
+	<div>
+		<div class="input-group mb-2">
+			<input type="text" required="required" class="form-control" placeholder="이메일">
+			<span class="input-group-text span-at">@</span>
+			<input type="text" class="form-control" id="input-email" name="person_email">
+			<div class="invalid-feedback">
+		      이메일을 입력해주세요
+		    </div>
+		</div>
+	</div>
+	<div>
+		<div class="input-group mb-2">
+			<select required="required" class="form-select" id="select-domain">
+			    <option value="" selected disabled>주소선택</option>
+			    <option value="naver.com">naver.com</option>
+			    <option value="gmail.com">gmail.com</option>
+			    <option value="custom">직접입력</option>
+			</select>
+			<div class="invalid-feedback">
+		      이메일 주소를 선택해주세요
+		    </div>
+		</div>
+	</div>
+	<div>
+		<button type="submit" class="btn btn-primary" id="btn-insert">회원가입</button>
+	</div>
+  </form>
+  <div id="div-login">
+  	<div>
+  		<span>계정이 있으신가요?</span>
+  		<a href="login.do" id="a-login">로그인</a>
+  	</div>
+  </div> 
+</div>
+</div>
 <script>
-	window.onload = f_init;
+	let countUsingId = 0;
+	$('#input-email').prop('disabled', true);
+	$('#div-usingId').addClass('none');
+	$('#div-header').on('click', function() { window.location.href = 'main'; });
+	$('#btn-insert').on('click', checkValidation);
+	$('#input-phone').on('input', function () { formatPhoneNumber($(this)); });
+	$('#input-id').on('input', function () { checkId($(this)); });
+	$('#select-domain').on('change', function (event) { toggleInput(event); });
+	$('#input-showPw').on('change', showPw);
 	
-	function f_init(){
-		$('#input-email').prop('disabled', true);
-		$('#div-header').on('click', function() { window.location.href = 'main'; });
-		$('#btn-insert').on('click', checkValidation);
-		$('#input-phone').on('input', function () { formatPhoneNumber($(this)); });
-		$('#input-id').on('input', function () { checkId($(this)); });
-		$('#select-domain').on('change', function (event) { toggleInput(event); });
+	function showPw(){
+		if ($('#input-showPw').is(':checked')) {
+			$('#input-pw').attr('type', 'text'); // 체크되었을 때 type을 text로 변경
+	    } else {
+	    	$('#input-pw').attr('type', 'password'); // 체크 해제 시 type을 password로 변경
+	    }
 	}
-	
+
 	function checkId($input){
 		let value = $input.val();
 		
@@ -22,13 +111,14 @@
 			type:"get",
 			data:{ "person_id":$('[name="person_id"]').val() },
 			success:function(count){
-
+				countUsingId = count;
 				if(count === "1"){
-					console.log("이미 존재하는 ID");
+					$('#div-usingId').removeClass('none');
+					$('#div-usingId').addClass('block');
 				} else {
-					console.log("사용 가능한 ID");
+					$('#div-usingId').removeClass('block');
+					$('#div-usingId').addClass('none');
 				}
-				
 			},
 			error:function(err){
 				alert(err);
@@ -40,7 +130,8 @@
 	    $('.needs-validation').each(function () {
 	        
 	        $(this).on('submit', function (event) {
-	            if (!this.checkValidity()) {
+	        	console.log("checkValidation:"+countUsingId);
+	            if (!this.checkValidity() || countUsingId != 0) {
 	                event.preventDefault();
 	                event.stopPropagation();
 	            }
@@ -75,81 +166,5 @@
 	    }
 	}
 </script>
-</head>
-<body>
-<div>
-	<div id="div-header">
-			<img id="img-kbo" src="images/KBO.png" alt="KBO">
-			<label id="label-header">야구 직관 프로그램</label>
-	</div>
-	<div class="container mt-3">
-  <h2>회원가입</h2>  
-  <form action="" method="post" class="row g-3 needs-validation" novalidate>
-	<div>
-		<div class="input-group mb-3">
-			<span class="input-group-text">아이디</span>
-			<input type="text" required="required" class="form-control" name="person_id"
-			 maxlength="20" placeholder="최대 20자" id="input-id">
-			<div class="invalid-feedback">
-	          아이디를 입력해주세요
-	        </div>
-	        <div id="span-usingId" style="display: block; width: 100%; color:#dc3545; font-size: 14px;">사용중인 아이디입니다</div>
-		</div>
-	</div>
-	<div>
-		<div class="input-group mb-3">
-			<span class="input-group-text">패스워드</span>
-			<input type="password" required="required" class="form-control" name="person_pw"
-			 maxlength="20" placeholder="최대 20자">
-			<div class="invalid-feedback">
-	          패스워드를 입력해주세요
-	        </div>
-		</div>
-	</div>
-	<div>
-		<div class="input-group mb-3">
-			<span class="input-group-text">핸드폰번호</span>
-			<input type="text" required="required" class="form-control" name="person_phone"
-			  maxlength="13" id="input-phone">
-			<div class="invalid-feedback">
-	          핸드폰번호를 입력해주세요
-	        </div>  
-		</div>
-	</div>
-	<div>
-		<div class="input-group mb-3">
-			<input type="text" required="required" class="form-control" placeholder="이메일">
-			<span class="input-group-text span-at">@</span>
-			<input type="text" class="form-control" id="input-email" name="person_email">
-			<div class="invalid-feedback">
-		      이메일을 입력해주세요
-		    </div>
-		</div>
-	</div>
-	<div>
-		<div class="input-group mb-3">
-			<select required="required" class="form-select" id="select-domain">
-			    <option value="" selected disabled>주소선택</option>
-			    <option value="naver.com">naver.com</option>
-			    <option value="gmail.com">gmail.com</option>
-			    <option value="custom">직접입력</option>
-			</select>
-			<div class="invalid-feedback">
-		      이메일 주소를 선택해주세요
-		    </div>
-		</div>
-	</div>
-	<div>
-		<button type="submit" class="btn btn-primary" id="btn-insert">회원가입</button>
-	</div>
-  </form>
-  <div id="div-new">
-  	<div>
-  		<span>계정이 있으신가요?</span>
-  		<a href="login.do" id="a-login">로그인</a>
-  	</div>
-  </div> 
-</div>
-</div>
 </body>
 </html>

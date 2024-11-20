@@ -34,6 +34,7 @@ a {
 	padding: 3px;
 	line-height: 26px;
 	color: #002561;
+	box-sizing: content-box;
 }
 
 a:click {
@@ -68,7 +69,3 @@ a:click {
 #label-id {
 	text-align: center;
 }
-
-/* #a-login {
-	height: 60px;
-} */
