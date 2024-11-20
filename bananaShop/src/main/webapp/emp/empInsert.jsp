@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
   <title>직원등록</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
   [required] { border: 2px solid skyblue; }
   </style>
@@ -21,6 +17,9 @@
 </head>
 <body>
 <div class="container mt-3">
+  <!-- include 디렉티브 태그는 jsp를 합쳐서 컴파일함 -->
+  <%@ include file="../jsp/header.jsp" %>
+  
   <h2>신규 직원 등록</h2>  
   <form action="insert.do" method="post">
     <div class="input-group mb-3">

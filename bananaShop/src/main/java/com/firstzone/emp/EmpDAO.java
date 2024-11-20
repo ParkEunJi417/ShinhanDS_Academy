@@ -185,9 +185,10 @@ public class EmpDAO {
 	public List<EmpDTO> selectByCondition(Map<String,Object> map) {
 		String sql = """
 				select * from employees 
-				where 	department_id = ? and 
-						job_id = ? and 
-						salary >= ? and hire_date >= ?
+				where 	(-1 = ? or department_id = ?) and 
+						('-1' = ? or job_id = ?) and 
+						salary >= ? and
+						hire_date >= ?
 				""";
 		conn = DBUtil.getConnection();
 
@@ -196,9 +197,11 @@ public class EmpDAO {
 		try {
 			st = conn.prepareStatement(sql);
 			st.setInt(1, (Integer)map.get("department_id"));
-			st.setString(2, (String)map.get("job_id"));
-			st.setDouble(3, (Double)map.get("salary"));
-			st.setDate(4, (Date)map.get("hire_date"));
+			st.setInt(2, (Integer)map.get("department_id"));
+			st.setString(3, (String)map.get("job_id"));
+			st.setString(4, (String)map.get("job_id"));
+			st.setDouble(5, (Double)map.get("salary"));
+			st.setDate(6, (Date)map.get("hire_date"));
 			rs = st.executeQuery();
 
 			while (rs.next()) {

@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.firstzone.dept.DeptDTO;
 import com.firstzone.dept.DeptService;
+import com.firstzone.member.MemberDTO;
 
 @WebServlet("/dept/select.do")
 public class DeptListServlet extends HttpServlet {
@@ -20,6 +22,16 @@ public class DeptListServlet extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그인한 Member만 직원정보를 볼 수 있음
+		// 세션은 Browser당 1개
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO) session.getAttribute("loginMember2");
+		if(member == null) {
+			String path = getServletContext().getContextPath();
+			response.sendRedirect(path + "/auth/login.do");
+			return;
+		}
+				
 		DeptService dService = new DeptService();
 		List<DeptDTO> deptlist = dService.selectAllService();
 		
