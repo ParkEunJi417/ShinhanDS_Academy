@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+// 자바 → JSP에서 자바코드를 쓰는 것은 권장사항 아님
+%>
+<%!
+// 선언 → instance field, instance method 권장사항 아님
+%>
+<%-- jsp주석은 jsp → java로 변환시 무시, jsp ▶ java로 변환 ▶ class 컴파일 ▶ 실행 --%>
+<%-- 출력 : <%= %> --%>
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="../jsp/header2.jsp"%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -10,6 +19,8 @@
 	<div class="container">
 		<!-- include 디렉티브 태그는 jsp를 합쳐서 컴파일함 -->
 		<%@ include file="../jsp/header.jsp"%>
+		<!-- 각각의 jsp를 따로 컴파일함 -->
+		<jsp:include page="../jsp/common.jsp"></jsp:include>
 		<div class="input-group mb-3">
 			<span class="input-group-text">부서</span>
 			<select class="form-control"name="department_id">
@@ -39,50 +50,6 @@
 		<hr>
 		<h1>직원List</h1>
 		<div id="table_here">
-		<table class="table table-striped-columns table-hover">
-			<tr>
-				<th>직원번호</th>
-				<th>first_name</th>
-				<th>last_name</th>
-				<th>dept</th>
-				<th>email</th>
-				<th>phone</th>
-				<th>job_id</th>
-				<th>comm</th>
-				<th>salary</th>
-				<th>hiredate</th>
-				<th>manager</th>
-				<th>Get</th>
-				<th>Post</th>
-			</tr>
-
-			<%-- ${} : getAttribute()라는 의미 --%>
-			<c:forEach items="${empDatas}" var="emp">
-				<tr>
-					<td><a href="${path}/emp/detail.do?empid=${emp.employee_id}">${emp.employee_id}</a>
-					</td>
-					<td><a href="${path}/emp/detail.do?empid=${emp.employee_id}">${emp.first_name}</a>
-					</td>
-					<td>${emp.last_name}</td>
-					<td>${emp.department_id}</td>
-					<td>${emp.email}</td>
-					<td>${emp.phone_number}</td>
-					<td>${emp.job_id}</td>
-					<td>${emp.commission_pct}</td>
-					<td>${emp.salary}</td>
-					<td>${emp.hire_date}</td>
-					<td>${emp.manager_id}</td>
-					<td><button
-							onclick="location.href='${path}/emp/delete.do?empid=${emp.employee_id}'">삭제</button></td>
-					<td>
-						<form action="${path}/emp/delete.do" method="post">
-							<input type="hidden" value="${emp.employee_id}" name="empid">
-							<button>삭제</button>
-						</form>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
 		</div>
 	</div>
 <script>
@@ -91,6 +58,7 @@ $(function(){
 	today.setFullYear(today.getFullYear() - 20);
 	$('[name="hire_date"]').val(today.toISOString().split('T')[0]);
 	$("#btn_condition").on("click", f_ajax);
+	$("#btn_condition").trigger("click"); // 이벤트 호출
 });
 
 function f_ajax(){

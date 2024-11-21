@@ -49,7 +49,7 @@ public class EmpListServlet extends HttpServlet {
 		System.out.println(emplist.size());
 
 		// request영역에 empDatas 이름으로 emplist 정보를 저장
-		request.setAttribute("empDatas", emplist);
+		//request.setAttribute("empDatas", emplist);
 		request.setAttribute("deptlist", dService.selectAllService());
 		request.setAttribute("joblist", empService.selectAllJobService());
 		

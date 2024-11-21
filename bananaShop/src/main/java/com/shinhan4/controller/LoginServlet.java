@@ -107,6 +107,7 @@ public class LoginServlet extends HttpServlet {
 			// 2.session
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember2", member);
+			session.setAttribute("loginMember", member);
 			
 			// 3.request
 			request.setAttribute("loginMember1", member);

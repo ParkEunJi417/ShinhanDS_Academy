@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="../jsp/header2.jsp"%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -16,25 +17,27 @@
 </style>
 </head>
 <body>
-<%@ include file="../jsp/header.jsp" %>
-<h2>부서 등록</h2>  
-<table class="table table-striped-columns table-hover">
-	<tr>
-		<th>부서번호</th>
-		<th>부서이름</th>
-		<th>부서장</th>
-		<th>지역번호</th>
-	</tr>
-
-	<c:forEach items="${deptDatas}" var="dept">
+<div class="container">
+	<%@ include file="../jsp/header.jsp" %>
+	<h2>부서 등록</h2>  
+	<table class="table table-striped-columns table-hover">
 		<tr>
-			<td><a href="detail.do?deptid=${dept.department_id}">${dept.department_id}</a></td>
-			<td>${dept.department_name}</td>
-			<td>${dept.manager_id}</td>
-			<td>${dept.location_id}</td>
-			<td><button onclick="location.href='delete.do?deptid=${dept.department_id}'">삭제</button></td>
+			<th>부서번호</th>
+			<th>부서이름</th>
+			<th>부서장</th>
+			<th>지역번호</th>
 		</tr>
-	</c:forEach>
-</table>
+	
+		<c:forEach items="${deptDatas}" var="dept">
+			<tr>
+				<td><a href="detail.do?deptid=${dept.department_id}">${dept.department_id}</a></td>
+				<td>${dept.department_name}</td>
+				<td>${dept.manager_id}</td>
+				<td>${dept.location_id}</td>
+				<td><button onclick="location.href='delete.do?deptid=${dept.department_id}'">삭제</button></td>
+			</tr>
+		</c:forEach>
+	</table>
+</div>
 </body>
 </html>

@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- include 디렉티브 태그는 jsp를 합쳐서 컴파일함 -->
+  <%@ include file="../jsp/header2.jsp" %>
   <title>직원등록</title>
   <meta charset="utf-8">
   <style>
@@ -17,9 +19,6 @@
 </head>
 <body>
 <div class="container mt-3">
-  <!-- include 디렉티브 태그는 jsp를 합쳐서 컴파일함 -->
-  <%@ include file="../jsp/header.jsp" %>
-  
   <h2>신규 직원 등록</h2>  
   <form action="insert.do" method="post">
     <div class="input-group mb-3">

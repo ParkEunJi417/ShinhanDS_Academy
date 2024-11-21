@@ -4,11 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="../jsp/header2.jsp"%>
   <title>직원수정</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
   [required] { border: 2px solid blue; }
   h2 { background: skyblue; }
@@ -16,6 +14,7 @@
 </head>
 <body>
 <div class="container mt-3">
+  <%@ include file="../jsp/header.jsp"%>
   <h2>직원정보 수정</h2>  
   <form action="detail.do" method="post">
     <div class="input-group mb-3">
