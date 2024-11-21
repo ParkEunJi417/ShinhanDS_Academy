@@ -27,24 +27,30 @@ public class NewPerson extends HttpServlet {
 		BaseballService bService = new BaseballService();
 
 		PersonDTO person = makePerson(request);
-		int result = bService.insertPerson(person);
-				
-		response.sendRedirect("main.jsp");
+		int insertPerson = bService.insertPerson(person);
+		boolean isInsert = insertPerson==1?true:false;
+		
+		request.setAttribute("result", isInsert);
+		request.setAttribute("newPersonId", request.getParameter("person_id"));
+		RequestDispatcher rd = request.getRequestDispatcher("jsp/newPersonRegister.jsp");
+		rd.forward(request, response);
+		
+		//response.sendRedirect("jsp/newPersonRegister.jsp");
 	}
 
 	private PersonDTO makePerson(HttpServletRequest request) {
 		PersonDTO person = null;
 		
-		String person_id = request.getParameter("person_id");
-		String person_pw = request.getParameter("person_pw");
-		String person_phone = request.getParameter("person_phone");
-		String person_email = request.getParameter("person_email");
+		String id = request.getParameter("person_id");
+		String pw = request.getParameter("person_pw");
+		String phone = request.getParameter("person_phone");
+		String email = request.getParameter("person_email")+"@"+request.getParameter("person_domain");
 		
 		person = PersonDTO.builder()
-						  .person_id(person_id)
-						  .person_pw(person_pw)
-						  .person_phone(person_phone)
-						  .person_email(person_email)
+						  .person_id(id)
+						  .person_pw(pw)
+						  .person_phone(phone)
+						  .person_email(email)
 						  .build();
 		
 		return person;

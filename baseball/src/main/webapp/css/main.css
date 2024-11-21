@@ -19,11 +19,11 @@ body {
 	font-family: "KBO_light", sans-serif;
 	color: #002561;
 }
-label{
-	height: 26px;
+label {
+	height: 40px;
 	display: inline-block;
+	margin-right: 5px;
 	padding: 3px;
-	line-height: 26px;
 	box-sizing: content-box;
 }
 
@@ -39,6 +39,10 @@ a {
 
 a:click {
 	font-weight: bold;
+}
+
+#div-header {
+	margin-top: 20px;
 }
 
 #div-header, #div-menu, #div-login, #div-logout {

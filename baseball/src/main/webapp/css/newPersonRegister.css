@@ -23,20 +23,12 @@ body {
 h2 {
 	font-family: "KBO_medium", sans-serif;
 }
-
-label {
-	height: 40px;
-	display: inline-block;
-	margin-right: 5px;
-	padding: 3px;
-	box-sizing: content-box;
-}
-
 button {
+	margin: 5px;
 	font-weight: bold !important;
 }
 
-form div, h2, #div-new, #div-header {
+.container div, h2, #div-login, #div-header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -46,21 +38,8 @@ form div, h2, #div-new, #div-header {
 	width: 50%;
 }
 
-.mb-3 {
-	width: 300px;
-}
-
-.form-control {
-	width: 200px;
-}
-
-.input-group-text {
-	width: 80px;
-	display: inline;
-}
-
-#div-new {
-	margin-top: 5px;
+.none {
+	display: none !important;
 }
 
 #div-header {
@@ -73,13 +52,18 @@ form div, h2, #div-new, #div-header {
 
 #label-header {
 	width: 260px;
+	height: 40px;
 	text-align: left;
 	font-family: "KBO_bold", sans-serif;
 	font-size: 2rem;
 	font-style: normal;
+	display: inline-block;
+	margin-right: 5px;
+	padding: 3px;
+	box-sizing: content-box;
 }
 
-#a-signUp {
+#a-login {
 	font-weight: bold;
 	text-underline-offset: 4px;
 }
@@ -87,8 +71,4 @@ form div, h2, #div-new, #div-header {
 #img-kbo {
 	width: 200px;
 	height: auto;
-}
-
-#span-errorMessage {
-	color: red;
 }

@@ -2,30 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <link href="${path}/css/login.css" rel="stylesheet">
-<script>
-	$(init);
-
-	function init(){
-		$('#div-header').on('click', function() { window.location.href = 'main'; });
-		setId();
-	}
-	
-	function setId(){
-		let urlParams = new URLSearchParams(window.location.search);
-        let idParam = urlParams.get('id');
-        console.log(idParam);
-
-        if (idParam != null) {
-            $('#input-id').val(urlParams.get('id'));
-            $('#input-pw').focus();
-        }
-	}
-</script>
 </head>
 <body>
 <div>
 	<div id="div-header">
-			<img id="img-kbo" src="images/KBO.png" alt="KBO">
+			<img id="img-kbo" src="${path}/images/KBO.png" alt="KBO">
 			<label id="label-header">야구 직관 프로그램</label>
 	</div>
 	<div class="container mt-3">
@@ -58,5 +39,20 @@
 	  </div> 
 	</div>
 </div>
+<script>
+	$('#div-header').on('click', function() { window.location.href = 'main'; });
+	setId();
+	
+	function setId(){
+		let urlParams = new URLSearchParams(window.location.search);
+        let idParam = urlParams.get('id');
+        console.log(idParam);
+
+        if (idParam != null) {
+            $('#input-id').val(urlParams.get('id'));
+            $('#input-pw').focus();
+        }
+	}
+</script>
 </body>
 </html>
