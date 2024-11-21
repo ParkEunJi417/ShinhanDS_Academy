@@ -20,16 +20,17 @@
 		<a href="login.do" id="a-login">로그인</a>
 	</div>
 	<div id="div-logout">
-		<label id="label-id"></label>
+		<span id="span-id"></span>
 		<a href="logout.do" id="a-logout">로그아웃</a>
 	</div>
 </div>
 <script>
 	$('#thisWeekGame').click(()=>{ $(location).attr('href','gameThisWeek.select'); });
+	$('#selectWatching').click(()=>{ $(location).attr('href','watchingById.select'); });
 	
 	if ("${result}" !== "" && "${result}" !== null) {
         $('#div-login').css('display', 'none');
-        $('#div-logout label').html("${result}");
+        $('#span-id').html("${result}"+"님 환영합니다.");
         $('#div-logout').css('display', 'flex');
     } else {
         $('#div-login').css('display', 'flex');

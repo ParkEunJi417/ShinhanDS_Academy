@@ -48,7 +48,7 @@ public class Login extends HttpServlet {
 			response.sendRedirect("login.do?message="+message+"&id="+id);
 			return;
 		} else {
-			message = person.getPerson_id()+"님 환영합니다.";
+			message = person.getPerson_id();
 		}
 
 		session.setAttribute("result", message);

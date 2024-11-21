@@ -11,8 +11,8 @@
 <pre>
 1.산술연산자 ▶ ${1+2}
 2.비교연산자 ▶ ${10>20}
-<%-- 3.문자+숫자(불가) ▶ ${"문자"}10 --%>
-4.null(무시) ▶ ${null+10}
+3.문자+숫자(불가) ▶ ${"문자"}10
+<%-- 4.null(무시) ▶ ${null+10} --%>
 4.null(무시) ▶ ${null+"10"}
 5.empty ▶ ${empty "hello"}
 5.empty ▶ ${empty 10}
@@ -33,7 +33,7 @@ application.setAttribute("score", 400);
 %>
 6.pageContext ▶ ${score}
 6.request ▶ ${request.score}
-${session.score}
+6.session ▶ ${session.score}
 6.application ▶ ${application.score}
 <!-- ?myname=aaa&myname2=bbb -->
 7.param읽기 ▶ ${param.myname}

@@ -44,37 +44,6 @@
 				</td>
 			</tr>
 		</c:forEach>
-
-			
-			
-			
-			
-<%-- 			<%
-			BaseballService bService = new BaseballService();
-			
-			List<RecordGameDTO> gamelist = bService.selectGameThisWeek();
-			
-			for(RecordGameDTO game:gamelist){
-				int scoreA = game.getTeam_score_a();
-		        int scoreH = game.getTeam_score_h();
-		        String colorA = scoreA > scoreH?"rgb(68,114,196)":"gray";
-		        String colorH = scoreA < scoreH?"rgb(68,114,196)":"gray";	        
-			%>
-			<tr>
-				<td class="date"><%= game.getGame_date() %></td>
-				<td> 
-					<div class="teamName"><%= game.getTeam_name_a() %></div>
-					<div data-teamid="<%= game.getTeam_id_a() %>">로고</div>
-					<div class="score" style="color: <%= colorA %>;">
-						<%= game.getTeam_score_a() %></div>
-					<div> vs </div>
-					<div class="score" style="color: <%= colorH %>;">
-						<%= game.getTeam_score_h() %></div>
-					<div data-teamid="<%= game.getTeam_id_h() %>">로고</div>
-					<div class="teamName"><%= game.getTeam_name_h() %></div>
-				</td>
-			</tr>	
-			<%} %> --%>
 		</tbody>
 	</table>
 </div>
