@@ -11,7 +11,7 @@
 	</div>
 	<div class="container mt-3">
   <h2>회원가입</h2>  
-  <form action="" method="post" class="row g-3 needs-validation" novalidate>
+  <form action="newPerson.insert" method="post" class="row g-3 needs-validation" novalidate>
 	<div>
 		<div class="input-group mb-2">
 			<span class="input-group-text">아이디</span>

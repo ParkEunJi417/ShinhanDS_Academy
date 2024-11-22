@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Main
- */
+// 메인
 @WebServlet("/main")
 public class Main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,5 +18,4 @@ public class Main extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
 	}
-
 }

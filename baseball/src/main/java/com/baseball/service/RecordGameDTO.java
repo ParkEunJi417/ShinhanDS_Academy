@@ -26,8 +26,7 @@ public class RecordGameDTO {
 	
 	@Override
 	public String toString() {
-		return "경기번호:" + game_no + ", 경기일정:" + game_date + ", 매칭팀:" + team_name_a
-				+ " vs " + team_name_h + ", 점수:" + team_score_a + ":" + team_score_h;
+		return team_name_a + " vs " + team_name_h;
 	}
 
 	

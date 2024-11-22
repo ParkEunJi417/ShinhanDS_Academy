@@ -1,29 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-	font-family: 'KBO_light';
-	src: url('../fonts/KBO_light.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'KBO_bold';
-	src: url('../fonts/KBO_bold.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'KBO_medium';
-	src: url('../fonts/KBO_medium.ttf') format('truetype');
-}
-
-body {
-	font-family: "KBO_light", sans-serif;
-	color: #002561;
-}
-
-h2 {
-	font-family: "KBO_medium", sans-serif;
-}
-
 button {
 	font-weight: bold !important;
 }

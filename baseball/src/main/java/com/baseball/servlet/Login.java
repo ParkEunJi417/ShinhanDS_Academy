@@ -16,9 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.baseball.service.BaseballService;
 import com.baseball.service.PersonDTO;
 
-/**
- * Servlet implementation class login
- */
+// 로그인
 @WebServlet("/login.do")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;

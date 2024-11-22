@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.baseball.service.BaseballService;
 import com.baseball.service.PersonDTO;
 
+//회원가입
 @WebServlet("/newPerson.insert")
 public class NewPerson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,8 +35,6 @@ public class NewPerson extends HttpServlet {
 		request.setAttribute("newPersonId", request.getParameter("person_id"));
 		RequestDispatcher rd = request.getRequestDispatcher("jsp/newPersonRegister.jsp");
 		rd.forward(request, response);
-		
-		//response.sendRedirect("jsp/newPersonRegister.jsp");
 	}
 
 	private PersonDTO makePerson(HttpServletRequest request) {

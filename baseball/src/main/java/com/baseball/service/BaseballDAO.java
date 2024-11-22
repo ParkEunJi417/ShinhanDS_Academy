@@ -216,6 +216,30 @@ public class BaseballDAO {
 
 		return result;
 	}
+	
+	// 모든 경기 일정
+	public List<Date> selectAllGameDate () {
+		String sql = """
+				select distinct game_date from game order by game_date
+				""";
+		conn = DBUtil.getConnection();
+		List<Date> datelist = new ArrayList<>();
+		
+		try {
+			st = conn.prepareStatement(sql);
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				datelist.add(rs.getDate("game_date"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
+		}
+		
+		return datelist;
+	}
 
 	// 해당 일자의 경기 출력
 	public List<RecordGameDTO> selectByGameDate(Date game_date) {

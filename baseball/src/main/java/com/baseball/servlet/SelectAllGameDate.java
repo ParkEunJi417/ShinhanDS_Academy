@@ -1,6 +1,10 @@
 package com.baseball.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,17 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.baseball.service.BaseballService;
 
-//기가입자 확인
-@WebServlet("/id.check")
-public class CheckId extends HttpServlet {
+// 모든 경기 일정
+@WebServlet("/allGameDate.select")
+public class SelectAllGameDate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
 		BaseballService bService = new BaseballService();
-		int CountVaildId = bService.selectPersonId(request.getParameter("person_id"));
-
-		response.getWriter().write(String.valueOf(CountVaildId));
+		List<Date> datelist = bService.selectAllGameDate();
+		
+		request.setAttribute("datelist", datelist);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("jsp/selectAllGameDate.jsp");
+		rd.forward(request, response);
 	}
 }

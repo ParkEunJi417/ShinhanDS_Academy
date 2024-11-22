@@ -40,6 +40,11 @@ public class BaseballService {
 	public int insertWatching(String person_id, int game_no, int watch_team_id) {
 		return bbDAO.insertWatching(person_id, game_no, watch_team_id);
 	}
+	
+	// 모든 경기 일정
+	public List<Date> selectAllGameDate(){
+		return bbDAO.selectAllGameDate();
+	}
 
 	// 해당 일자의 경기 일정
 	public List<RecordGameDTO> selectByGameDate(Date game_date) {

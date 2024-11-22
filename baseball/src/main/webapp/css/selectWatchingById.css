@@ -1,25 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-	font-family: 'KBO_light';
-	src: url('../fonts/KBO_light.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'KBO_bold';
-	src: url('../fonts/KBO_bold.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'KBO_medium';
-	src: url('../fonts/KBO_medium.ttf') format('truetype');
-}
-
-body {
-	font-family: "KBO_light", sans-serif;
-	color: #002561;
-}
-
 label {
 	height: 40px;
 	display: inline-block;
@@ -31,10 +11,6 @@ label {
 th, td {
 	text-align: center;
 	vertical-align: middle;
-}
-
-h2 {
-	font-family: "KBO_medium", sans-serif;
 }
 
 div[data-teamid="1"] {
@@ -104,6 +80,14 @@ td .container div {
 	text-align: center;
 }
 
+.block {
+	display: block !important;
+}
+
+.none {
+	display: none !important;
+}
+
 #img-kbo, label:hover {
 	cursor: pointer;
 }
@@ -129,4 +113,9 @@ h2, #div-header {
 	font-family: "KBO_bold", sans-serif;
 	font-size: 2rem;
 	font-style: normal;
+}
+
+#div-validWatching {
+	color:#dc3545;
+	font-size: 14px;
 }

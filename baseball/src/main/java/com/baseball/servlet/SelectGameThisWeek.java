@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.baseball.service.BaseballService;
 import com.baseball.service.RecordGameDTO;
 
+// 이번주 야구일정
 @WebServlet("/gameThisWeek.select")
 public class SelectGameThisWeek extends HttpServlet {
 	private static final long serialVersionUID = 1L;
