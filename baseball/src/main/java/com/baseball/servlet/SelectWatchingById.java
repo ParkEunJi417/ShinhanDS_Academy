@@ -29,6 +29,16 @@ public class SelectWatchingById extends HttpServlet {
 		BaseballService bService = new BaseballService();
 		List<RecordPerDTO> person = bService.selectById(id);
 		
+		for(RecordPerDTO per:person) {
+			if(per.getTeam_score_a() > per.getTeam_score_h()) {
+				per.setColor(per.getTeamid() == per.getTeam_id_a() ? "table-primary" : "table-danger");
+			} else if(per.getTeam_score_a() < per.getTeam_score_h()) {
+				per.setColor(per.getTeamid() == per.getTeam_id_h() ? "table-primary" : "table-danger");
+			} else {
+				per.setColor("table-secondary");
+			}
+		}
+		
 		request.setAttribute("watchingData", person);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/selectWatchingById.jsp");

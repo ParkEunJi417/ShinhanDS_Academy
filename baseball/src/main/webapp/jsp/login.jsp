@@ -40,13 +40,13 @@
 	</div>
 </div>
 <script>
-	$('#div-header').on('click', function() { window.location.href = 'main'; });
+	$('#img-kbo').click(() => location.href = 'main');
+	$('#label-header').click(() => location.href = 'main');
 	setId();
 	
 	function setId(){
 		let urlParams = new URLSearchParams(window.location.search);
         let idParam = urlParams.get('id');
-        console.log(idParam);
 
         if (idParam != null) {
             $('#input-id').val(urlParams.get('id'));

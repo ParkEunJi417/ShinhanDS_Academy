@@ -10,15 +10,20 @@
 			<label id="label-header">야구 직관 프로그램</label>
 	</div>
 	<h2>직관기록</h2>
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#div-insertModal" data-bs-whatever="@mdo" id="btn-insertModal">
-			직관등록
-	</button>
-	<button type="button" class="btn btn-danger" data-bs-toggle="modal"
-			data-bs-target="#div-deleteModal" data-bs-whatever="@mdo" id="btn-deleteModal">
-			직관삭제
-	</button>
-	<table class="table table-hover">
+	<div id="div-title">
+		<label>직관승률:50%</label>
+		<div id="div-button">
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#div-insertModal" data-bs-whatever="@mdo" id="btn-insertModal">
+					직관등록
+			</button>
+			<button type="button" class="btn btn-danger" data-bs-toggle="modal"
+					data-bs-target="#div-deleteModal" data-bs-whatever="@mdo" id="btn-deleteModal">
+					직관삭제
+			</button>
+		</div>
+	</div>
+	<table class="table">
 	  <thead>
 	    <tr>
 	      <th scope="col"><input class="form-check-input" type="checkbox" id="input-selectAll"></th>
@@ -30,17 +35,17 @@
 	  </thead>
 	  <tbody>
 	  <c:forEach items="${watchingData}" var="wt" varStatus="status">
-	  <tr>
-	  	  <td><input class="form-check-input" type="checkbox"></td>
+	  <tr class="${wt.color}">
+	  	  <td><input class="form-check-input" type="checkbox" value="${wt.watch_no}"></td>
 		  <td>${status.index+1}</td>
 		  <td class="date">${wt.game_date}</td>
 		  <td>
 			<div class="container">
 			       <div class="teamName">${wt.team_name_a}</div>
 					<div data-teamid="${wt.team_id_a}"></div>
-					<div class="score" style="color: ${colorA};">${wt.team_score_a}</div>
+					<div class="score" >${wt.team_score_a}</div>
 					<div> vs </div>
-					<div class="score" style="color: ${colorH};">${wt.team_score_h}</div>
+					<div class="score">${wt.team_score_h}</div>
 					<div data-teamid="${wt.team_id_h}"></div>
 					<div class="teamName">${wt.team_name_h}</div>
 			  </div>
@@ -57,7 +62,7 @@
             <h1 class="modal-title fs-5">직관등록</h1>
           </div>
           <div class="modal-body">
-            <form id="form-modal" action="newWatching.insert">
+            <form id="form-insertModal" action="newWatching.insert">
             <div class="input-group mb-2">
 				<span class="input-group-text">경기일정</span>
  				<select class="form-select" id="select-date"></select>
@@ -97,7 +102,10 @@
           </div>
            <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-            <button type="button" form="form-watching" class="btn btn-danger" id="btn-delete">삭제</button>
+            <form id="form-deleteModal" action="watchingsById.delete" method="post">
+            	<input type="hidden" name="watch_no" id="input-watchno">
+            	<button type="button" form="form-watching" class="btn btn-danger" id="btn-delete">삭제</button>
+            </form>
           </div> 
         </div>
       </div>
@@ -109,29 +117,49 @@
 	let isSelectGame = false;
 	let isSelectTeam = false;
 	
-	$('#div-validWatching').addClass('none');
-	$('#div-header').on('click', function() { window.location.href = 'main'; });
-	$('#btn-deleteModal').on('click', checkDelete); // 직관삭제 모달
-	$('#btn-insertModal').on('click', function(){ // 직관등록 모달
-		$('#div-insertModal').show(); 
-		selectAllGameDate(); // 경기일정 ajax로 받아오기
+	$('#img-kbo, #label-header').click(() => location.href = 'main');
+	$('#btn-delete').click(deleteWatching); // 선택된 직관 삭제
+	$('#btn-deleteModal').click(checkDeleteRows); // 직관삭제 모달
+	$('#btn-insert').click(checkValidation); // 직관등록 모달 값 모두 입력됐는지 확인
+	$('#btn-insertModal').click(() => { // 직관등록 모달
+	    $('#div-validWatching').addClass('none');
+	    selectAllGameDate(); // 경기일정 ajax로 받아오기
 	});
-	$('tbody tr').on('click', function(event) { toggleCheckbox(event, this); }); // 행 클릭시 체크
-	$('#btn-insert').on('click', function(event){ checkValidation(event); }); // 직관등록 모달 값 모두 입력됐는지 확인
-	$('#select-date').on('change', selectByGameDate); // 해당 일자의 경기 일정 받아서 경기목록 option 부여
-	$('#select-game').on('change', function(){
-		selectByMatchTeam(); // 해당 날짜의 경기한 팀 받아서 응원한 팀 option 부여
-		selectGameNoById(); // 기등록 직관 경기 확인
+	$('tbody tr').click(function(event) { toggleCheckbox(event, this); }); // 행 클릭시 체크
+	
+	$('#select-date').change(selectByGameDate); // 해당 일자의 경기 일정 받아서 경기목록 option 부여
+	$('#select-game').change(() => { 
+	    selectByMatchTeam(); // 해당 날짜의 경기한 팀 받아서 응원한 팀 option 부여
+	    selectGameNoById(); // 기등록 직관 경기 확인
 	});
-	$('#input-selectAll').on('change', function() {
+	$('#input-selectAll').change(function() {
 	    $('tbody input[type="checkbox"]').prop('checked', this.checked); // 전체 체크 및 해제
 	});
 	
-	// 직관삭제 모달
-	function checkDelete(){
-		let checkedRows = $('tbody input[type="checkbox"]:checked').length;
-		
-		$('#div-deleteModalMessage').html(checkedRows+'개의 직관기록을 삭제하시겠습니까?');
+	function deleteWatching(){
+        // 체크된 행의 input value를 수집
+        let inputValues = [];
+        $("table tr").each(function () {
+            // 행의 체크박스가 체크된 경우
+            if ($(this).find("input").is(":checked")) {
+                // input 값을 가져와 배열에 추가
+                let inputValue = $(this).find("input").val();
+                
+                if(inputValue != 'on'){
+                	inputValues.push(inputValue);
+                }
+            }
+        });
+        let valuesString = inputValues.join(',');
+        $('#input-watchno').val(valuesString);
+        $('#form-deleteModal').submit();
+	}
+	
+	// 직관삭제 모달 내용 보여주기
+	function checkDeleteRows(){
+		let cntCheckedRows = $('tbody input[type="checkbox"]:checked').length;
+
+		$('#div-deleteModalMessage').html(cntCheckedRows+'개의 직관기록을 삭제하시겠습니까?');
 	}
 	
 	// 행 클릭시 체크
@@ -157,7 +185,7 @@
 		else { isSelectTeam = false; }
 
 		if (isInvalidWatching && isSelectDate && isSelectGame & isSelectTeam) {
-			$('#form-modal').submit();
+			$('#form-insertModal').submit();
         }
 	}
 	

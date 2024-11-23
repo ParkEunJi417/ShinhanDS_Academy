@@ -48,7 +48,7 @@
 	</table>
 </div>
 <script>
-	$('#div-header').on('click', function() { window.location.href = 'main'; });
+	$('#img-kbo, #label-header').click(() => location.href = 'main');
 </script>	
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.baseball.service;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -315,6 +316,42 @@ public class BaseballDAO {
 			st = conn.prepareStatement(sql);
 			st.setInt(1, watch_no);
 
+			result = st.executeUpdate();
+
+		} catch (SQLException e) {
+			try {
+				conn.rollback(); // DB에 작업한 내용 취소
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+		return result;
+	}
+	
+	// 해당 id의 직관들 삭제
+	public int deleteWatchingsById(String str_watchNos) {
+        StringBuilder placeholders = new StringBuilder();
+        String[] watchNos = str_watchNos.split(",");
+        
+        for (int i = 0; i < watchNos.length; i++) {
+            placeholders.append("?");
+            if (i < watchNos.length - 1) {
+                placeholders.append(", ");
+            }
+        }
+        
+		String sql = "delete from watching where watch_no in ("+placeholders+")";
+
+		conn = DBUtil.getConnection();
+		try {
+			st = conn.prepareStatement(sql);
+			
+			for (int i = 0; i < watchNos.length; i++) {
+				st.setInt(i + 1, Integer.parseInt(watchNos[i]));
+            }
 			result = st.executeUpdate();
 
 		} catch (SQLException e) {

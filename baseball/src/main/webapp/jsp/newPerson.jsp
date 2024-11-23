@@ -94,11 +94,14 @@
 	$('#input-email').prop('readonly', true);
 	$('#div-usingId').addClass('none');
 	$('#div-invalidDomain').addClass('none');
-	$('#div-header').on('click', function() { window.location.href = 'main'; });
-	$('#btn-insert').on('click', checkValidation);
-	$('#input-phone').on('input', function () { formatPhoneNumber($(this)); });
-	$('#input-id').on('input', function () { checkId($(this)); });	
-	$('#select-domain').on('change', function (event) { toggleInput(event); });
+	
+	$('#img-kbo, #label-header').click(() => location.href = 'main');
+	$('#btn-insert').click(checkValidation);
+	
+	$('#input-phone').on('input', () => formatPhoneNumber($('#input-phone')));
+	$('#input-id').on('input', () => checkId($('#input-id')));
+	
+	$('#select-domain').on('change', toggleInput);
 	$('#input-showPw').on('change', showPw);
 	
 	function checkDomain($input){
@@ -106,17 +109,16 @@
 		
 		const emailRegex = /[^\s@]+\.[^\s@]+$/;
 		let result = emailRegex.test(value);
-		console.log(result);
 
-            if (emailRegex.test(value)) {
-            	validDomain = true;
-            	$('#div-invalidDomain').removeClass('block');
-				$('#div-invalidDomain').addClass('none');
-            } else {
-            	validDomain = false;
-            	$('#div-invalidDomain').removeClass('none');
-				$('#div-invalidDomain').addClass('block');
-            }
+        if (emailRegex.test(value)) {
+        	validDomain = true;
+            $('#div-invalidDomain').removeClass('block');
+			$('#div-invalidDomain').addClass('none');
+        } else {
+            validDomain = false;
+            $('#div-invalidDomain').removeClass('none');
+			$('#div-invalidDomain').addClass('block');
+        }
 	}
 	
 	function showPw(){

@@ -39,6 +39,10 @@ a:click {
 	padding: 3px;
 }
 
+#div-menu div:hover {
+	cursor: pointer;
+}
+
 #img-kbo {
 	width: 200px;
 	height: auto;
@@ -51,6 +55,11 @@ a:click {
 	font-size: 2rem;
 	font-style: normal;
 }
+
+#img-kbo, label:hover {
+	cursor: pointer;
+}
+
 #span-id {
 	text-align: center;
 }

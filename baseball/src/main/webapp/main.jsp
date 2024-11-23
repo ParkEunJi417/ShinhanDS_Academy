@@ -11,9 +11,7 @@
 	</div>
 	<div id="div-menu">
 		<div id="thisWeekGame">이번주 경기일정</div>
-		<div id="insertWatching">직관등록</div>
 		<div id="selectWatching">직관기록</div>
-		<div id="deleteWatching">직관삭제</div>
 		<div id="updateInfo">정보수정</div>
 	</div>
 	<div id="div-login">
@@ -25,8 +23,9 @@
 	</div>
 </div>
 <script>
-	$('#thisWeekGame').click(()=>{ $(location).attr('href','gameThisWeek.select'); });
-	$('#selectWatching').click(()=>{ $(location).attr('href','watchingById.select'); });
+	$('#img-kbo, #label-header').click(() => location.href = 'main');
+	$('#thisWeekGame').click(() => location.href = 'gameThisWeek.select');
+	$('#selectWatching').click(() => location.href = 'watchingById.select');
 	
 	if ("${result}" !== "" && "${result}" !== null) {
         $('#div-login').css('display', 'none');

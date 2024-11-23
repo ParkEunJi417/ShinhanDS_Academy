@@ -26,6 +26,7 @@ public class RecordPerDTO {
 	
 	String teamname; 		// 응원팀명
 	int teamid;				// 응원팀 id
+	String color;			// 응원한 팀 승패에 따라 color 부여
 	
 	@Override
 	public String toString() {

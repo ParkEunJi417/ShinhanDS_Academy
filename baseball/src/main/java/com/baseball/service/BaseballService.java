@@ -60,6 +60,11 @@ public class BaseballService {
 	public int deleteById(int watch_no) {
 		return bbDAO.deleteById(watch_no);
 	}
+	
+	// 해당 id의 직관 1건 이상 삭제
+	public int deleteWatchingsById(String watch_no) {
+		return bbDAO.deleteWatchingsById(watch_no);
+	}
 
 	// 회원정보 수정
 	public int updateMember(PersonDTO bb) {

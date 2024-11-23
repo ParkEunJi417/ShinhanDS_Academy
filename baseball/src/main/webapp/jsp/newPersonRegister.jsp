@@ -41,10 +41,9 @@
 	$('#btn-login').addClass('none');
 	$('#btn-new').addClass('none');
 	
-	$('#div-header').on('click', function() { window.location.href = 'main'; });
-	$('#btn-home').on('click', function() { window.location.href = 'main'; });
-	$('#btn-login').on('click', function() { window.location.href = 'login.do'; });
-	$('#btn-new').on('click', function() { window.location.href = 'newPerson.insert'; });
+	$('#img-kbo, #label-header, #btn-home').click(() => location.href = 'main');
+	$('#btn-login').click(() => location.href = 'login.do');
+	$('#btn-new').click(() => location.href = 'newPerson.insert');
 	
 	if(${result}){
 		$('#div-success').removeClass('none');

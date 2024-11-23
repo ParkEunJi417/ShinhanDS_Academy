@@ -88,6 +88,22 @@ td .container div {
 	display: none !important;
 }
 
+#div-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+#div-button {
+	margin-left: auto;
+	display: flex;
+}
+
+#btn-deleteModal {
+	margin-left: 3px;
+}
+
 #img-kbo, label:hover {
 	cursor: pointer;
 }
