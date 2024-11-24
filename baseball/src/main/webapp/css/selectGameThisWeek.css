@@ -8,37 +8,23 @@ label {
 	box-sizing: content-box;
 }
 
-table, td, th {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-table {
-	margin: 0 auto;
-}
-
-td {
-	height: 32px;
-}
-
-th {
+th, td {
 	text-align: center;
-}
-
-td div {
-	float: left;
-	height: 32px;
-	line-height: 32px;
+	vertical-align: middle;
 }
 
 a {
 	text-decoration: none;
+	display: inline-block;
+	height: 26px;
+	padding: 3px;
+	line-height: 26px;
+	color: #002561;
+	box-sizing: content-box;
 }
 
-h2, #div-header {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+table {
+	width: 50% !important;
 }
 
 div[data-teamid="1"] {
@@ -80,10 +66,20 @@ div[data-teamid="9"] {
 div[data-teamid="10"] {
 	content: url("../images/10.png");
 }
+ 
+td .container {
+	display: flex;
+	justify-content: space-around;
+}
 
-.date {
-	width: 150px;
-	text-align: center;
+.container div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+td .container div {
+	height: 32px;	
 }
 
 .score {
@@ -98,8 +94,15 @@ div[data-teamid="10"] {
 	text-align: center;
 }
 
-#div-header {
+h2, #div-header, #div-login, #div-logout {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#div-login, #div-logout {
 	margin-top: 20px;
+	justify-content: right;
 }
 
 #img-kbo, label:hover {

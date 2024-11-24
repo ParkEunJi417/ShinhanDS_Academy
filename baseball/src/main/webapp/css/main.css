@@ -22,14 +22,15 @@ a:click {
 	font-weight: bold;
 }
 
-#div-header {
-	margin-top: 20px;
-}
-
 #div-header, #div-menu, #div-login, #div-logout {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+#div-login, #div-logout {
+	margin-top: 20px;
+	justify-content: right;
 }
 
 #div-menu div {

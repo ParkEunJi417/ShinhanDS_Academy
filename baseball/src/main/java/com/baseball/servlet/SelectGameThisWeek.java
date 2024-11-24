@@ -20,9 +20,19 @@ public class SelectGameThisWeek extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BaseballService bService = new BaseballService();
-		List<RecordGameDTO> game = bService.selectGameThisWeek();
+		List<RecordGameDTO> gamelist = bService.selectGameThisWeek();
+
+		for(RecordGameDTO game:gamelist) {
+			if(game.getTeam_score_a() > game.getTeam_score_h()) {
+				game.setTeam_color_a("rgb(68,114,196)");
+				game.setTeam_color_h("gray");
+			} else if (game.getTeam_score_a() < game.getTeam_score_h()) {
+				game.setTeam_color_h("rgb(68,114,196)");
+				game.setTeam_color_a("gray");
+			}
+		}
 		
-		request.setAttribute("gameData", game);
+		request.setAttribute("gameData", gamelist);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/selectGameThisWeek.jsp");
 		rd.forward(request, response);

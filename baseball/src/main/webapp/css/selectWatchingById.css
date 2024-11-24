@@ -13,6 +13,16 @@ th, td {
 	vertical-align: middle;
 }
 
+a {
+	text-decoration: none;
+	display: inline-block;
+	height: 26px;
+	padding: 3px;
+	line-height: 26px;
+	color: #002561;
+	box-sizing: content-box;
+}
+
 div[data-teamid="1"] {
 	content: url("../images/1.png");
 }
@@ -88,11 +98,52 @@ td .container div {
 	display: none !important;
 }
 
+.input-group-text {
+	width: 85px;
+	display: inline;
+}
+
+.datepicker-dropdown {
+    z-index: 1055 !important; /* Bootstrap Modal의 z-index보다 높게 설정 */
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group .datepicker_input {
+    padding-right: 30px; /* 아이콘이 들어갈 공간을 위해 오른쪽 패딩 추가 */
+}
+
+.input-group .bi-calendar-date {
+    position: absolute;
+    right: 10px;  /* 오른쪽 10px 거리 */
+    top: 50%;     /* 세로 중앙 맞추기 */
+    transform: translateY(-50%); /* 정확한 중앙 위치 */
+    font-size: 1.2rem; /* 아이콘 크기 조정 */
+    z-index: 1057;
+}
+
+#main {
+	width: 70% !important;
+}
+
+#select-game {
+	width: 248px;
+}
+
+#label-winRate{
+	line-height: 40px;
+}
+
 #div-title {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 100%;
+	width: 70%;
+	margin: auto;
+	padding-left: calc(var(--bs-gutter-x) * .5);
+	padding-right: calc(var(--bs-gutter-x) * .5);
 }
 
 #div-button {
@@ -104,18 +155,19 @@ td .container div {
 	margin-left: 3px;
 }
 
-#img-kbo, label:hover {
+#img-kbo, #label-header:hover {
 	cursor: pointer;
 }
 
-#div-header {
-	margin-top: 20px;
-}
-
-h2, #div-header {
+h2, #div-header, #div-login, #div-logout {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+#div-login, #div-logout {
+	margin-top: 20px;
+	justify-content: right;
 }
 
 #img-kbo {

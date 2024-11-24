@@ -4,7 +4,7 @@ button {
 	font-weight: bold !important;
 }
 
-form div, h2, #div-login, #div-header {
+form div, h2, #div-header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -45,7 +45,7 @@ form div, h2, #div-login, #div-header {
 	font-size: 14px;
 }
 
-#input-domain:read-only {
+#input-id, #input-domain:read-only {
 	background-color: #e9ecef; 
 }
 
@@ -56,10 +56,6 @@ form div, h2, #div-login, #div-header {
 #div-showPw {
 	display: block;
 	width: 100%;
-}
-
-#div-login {
-	margin-top: 5px;
 }
 
 #div-usingId {

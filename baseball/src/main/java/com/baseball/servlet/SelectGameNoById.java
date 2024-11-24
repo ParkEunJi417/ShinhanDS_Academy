@@ -20,15 +20,12 @@ public class SelectGameNoById extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		
 		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("result");
+		String id = (String)session.getAttribute("userid");
 		int gameno = Integer.parseInt(request.getParameter("no"));
 		
 		BaseballService bService = new BaseballService();
-		int countWatching = bService.selectGameNo(id, gameno);
+		int countWatching = bService.selectGameNoById(id, gameno);
 		
 		response.getWriter().write(String.valueOf(countWatching));
 	}

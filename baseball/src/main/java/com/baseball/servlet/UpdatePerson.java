@@ -8,37 +8,52 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.baseball.service.BaseballService;
 import com.baseball.service.PersonDTO;
 
-//회원가입
-@WebServlet("/newPerson.insert")
-public class NewPerson extends HttpServlet {
+/**
+ * Servlet implementation class UpdatePerson
+ */
+@WebServlet("/person.update")
+public class UpdatePerson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/newPerson.jsp");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("userid");
+		
+		BaseballService bService = new BaseballService();
+		PersonDTO person = bService.selectPersonInfo(id);
+		
+		request.setAttribute("info", person);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/updatePerson.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String sessionId = (String)session.getAttribute("userid");
+		
 		BaseballService bService = new BaseballService();
 
-		PersonDTO person = makePerson(request);
-		int insertPerson = bService.insertPerson(person);
-		boolean isInsert = insertPerson==1?true:false;
-		
-		request.setAttribute("result", isInsert);
-		request.setAttribute("newPersonId", request.getParameter("person_id"));
-		RequestDispatcher rd = request.getRequestDispatcher("jsp/newPersonRegister.jsp");
-		rd.forward(request, response);
+		PersonDTO person = makePerson(request, sessionId);
+		int updatePerson = bService.updatePerson(person);
+
+//		boolean isInsert = insertPerson==1?true:false;
+//		
+//		request.setAttribute("result", isInsert);
+//		request.setAttribute("newPersonId", request.getParameter("person_id"));
+//		RequestDispatcher rd = request.getRequestDispatcher("jsp/newPersonRegister.jsp");
+//		rd.forward(request, response);
 	}
 
-	private PersonDTO makePerson(HttpServletRequest request) {
+	private PersonDTO makePerson(HttpServletRequest request, String sessionId) {
 		PersonDTO person = null;
 		
-		String id = request.getParameter("person_id");
+		String id = sessionId;
 		String pw = request.getParameter("person_pw");
 		String phone = request.getParameter("person_phone");
 		String email = request.getParameter("person_email")+"@"+request.getParameter("person_domain");
@@ -52,4 +67,5 @@ public class NewPerson extends HttpServlet {
 		
 		return person;
 	}
+
 }

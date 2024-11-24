@@ -27,7 +27,7 @@ public class BaseballService {
 	}
 
 	// 기등록 직관 경기 확인
-	public int selectGameNo(String person_id, int game_no) {
+	public int selectGameNoById(String person_id, int game_no) {
 		return bbDAO.selectGameNoById(person_id, game_no);
 	}
 
@@ -42,7 +42,7 @@ public class BaseballService {
 	}
 	
 	// 모든 경기 일정
-	public List<Date> selectAllGameDate(){
+	public List<String> selectAllGameDate(){
 		return bbDAO.selectAllGameDate();
 	}
 
@@ -65,10 +65,15 @@ public class BaseballService {
 	public int deleteWatchingsById(String watch_no) {
 		return bbDAO.deleteWatchingsById(watch_no);
 	}
+	
+	// 회원정보
+	public PersonDTO selectPersonInfo(String person_id) {
+		return bbDAO.selectPersonInfo(person_id);
+	}
 
 	// 회원정보 수정
-	public int updateMember(PersonDTO bb) {
-		return bbDAO.updateMember(bb);
+	public int updatePerson(PersonDTO bb) {
+		return bbDAO.updatePerson(bb);
 	}
 
 }

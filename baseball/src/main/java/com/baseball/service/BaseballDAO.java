@@ -1,11 +1,11 @@
 package com.baseball.service;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -219,19 +219,21 @@ public class BaseballDAO {
 	}
 	
 	// 모든 경기 일정
-	public List<Date> selectAllGameDate () {
+	public List<String> selectAllGameDate () {
 		String sql = """
 				select distinct game_date from game order by game_date
 				""";
 		conn = DBUtil.getConnection();
-		List<Date> datelist = new ArrayList<>();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		List<String> datelist = new ArrayList<>();
 		
 		try {
 			st = conn.prepareStatement(sql);
 			rs = st.executeQuery();
 
 			while (rs.next()) {
-				datelist.add(rs.getDate("game_date"));
+		        String dateString = formatter.format(rs.getDate("game_date"));
+				datelist.add(dateString);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -366,9 +368,38 @@ public class BaseballDAO {
 		}
 		return result;
 	}
+	
+	// 회원정보
+	public PersonDTO selectPersonInfo(String person_id) {
+		String sql = "select * from person where person_id=?";
+		PersonDTO person = null;
+
+		conn = DBUtil.getConnection();
+
+		try {
+			st = conn.prepareStatement(sql);
+
+			st.setString(1, person_id);
+			rs = st.executeQuery();
+
+			if (rs.next()) {
+				person = PersonDTO.builder()
+								  .person_id(rs.getString("person_id"))
+								  .person_pw(rs.getString("person_pw"))
+								  .person_email(rs.getString("person_email"))
+								  .person_phone(rs.getString("person_phone"))
+								  .build();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+		return person;
+	}
 
 	// 수정
-	public int updateMember(PersonDTO person) {
+	public int updatePerson(PersonDTO person) {
 		String sql = """
 				update person set
 					person_pw=?,

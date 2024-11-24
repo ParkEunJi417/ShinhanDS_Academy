@@ -27,15 +27,13 @@ public class Login extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		
 		BaseballService bService = new BaseballService();
 		String id = request.getParameter("person_id");
 		String pw = request.getParameter("person_pw");
 		PersonDTO person = bService.loginPerson(id, pw);
-		String message = "";
+		String message = "", userid = "";
 		
 		if(person == null) {
 			message = URLEncoder.encode("아이디가 존재하지 않습니다.","utf-8");
@@ -46,10 +44,10 @@ public class Login extends HttpServlet {
 			response.sendRedirect("login.do?message="+message+"&id="+id);
 			return;
 		} else {
-			message = person.getPerson_id();
+			userid = person.getPerson_id();
 		}
 
-		session.setAttribute("result", message);
-		response.sendRedirect("main.jsp");
+		session.setAttribute("userid", userid);
+		response.sendRedirect("main");
 	}
 }
