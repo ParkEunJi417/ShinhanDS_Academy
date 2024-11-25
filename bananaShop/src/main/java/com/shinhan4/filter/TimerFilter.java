@@ -18,11 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 public class TimerFilter extends HttpFilter implements Filter {
 
     public TimerFilter() {
-        System.out.println("TimeFilter 서버 시작시 생성");
+        //System.out.println("TimeFilter 서버 시작시 생성");
     }
 
 	public void destroy() {
-		System.out.println("TimeFilter 서버 종료시 소멸");
+		//System.out.println("TimeFilter 서버 종료시 소멸");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -31,8 +31,8 @@ public class TimerFilter extends HttpFilter implements Filter {
 		long end = System.nanoTime();
 		
 		HttpServletRequest req = (HttpServletRequest)request;
-		System.out.print(req.getRequestURI()+"요청");
-		System.out.println(" 걸린시간:"+(end-start)+"ns");
+		//System.out.print(req.getRequestURI()+"요청");
+		//System.out.println(" 걸린시간:"+(end-start)+"ns");
 		
 	}
 

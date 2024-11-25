@@ -20,7 +20,7 @@ public class AListener implements ServletContextListener, HttpSessionListener, H
     int total_user;
     
     public AListener() {
-    	System.out.println("AListener 생성자");
+    	//System.out.println("AListener 생성자");
         // TODO Auto-generated constructor stub
     }
 
@@ -29,21 +29,21 @@ public class AListener implements ServletContextListener, HttpSessionListener, H
      */
     public void sessionCreated(HttpSessionEvent se)  { 
          total_user++;
-         System.out.println("sessionCreated 현재 접속수 : "+total_user);
+         //System.out.println("sessionCreated 현재 접속수 : "+total_user);
     }
 
 	/**
      * @see ServletRequestListener#requestDestroyed(ServletRequestEvent)
      */
     public void requestDestroyed(ServletRequestEvent sre)  { 
-        System.out.println("requestDestroy");
+        //System.out.println("requestDestroy");
     }
 
 	/**
      * @see ServletRequestListener#requestInitialized(ServletRequestEvent)
      */
     public void requestInitialized(ServletRequestEvent sre)  { 
-         System.out.println("requestInitailized");
+         //System.out.println("requestInitailized");
     }
 
 	/**
@@ -51,7 +51,7 @@ public class AListener implements ServletContextListener, HttpSessionListener, H
      */
     public void sessionDestroyed(HttpSessionEvent se)  {
     	--total_user;
-         System.out.println("sessionDestoryed 현재 접속수 : "+total_user);
+         //System.out.println("sessionDestoryed 현재 접속수 : "+total_user);
     }
 
 	/**
@@ -79,14 +79,14 @@ public class AListener implements ServletContextListener, HttpSessionListener, H
      * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
      */
     public void attributeReplaced(HttpSessionBindingEvent se)  { 
-        System.out.println("attribute replace");
+        //System.out.println("attribute replace");
     }
 
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-        System.out.println("context initial");
+        //System.out.println("context initial");
     }
 	
 }
