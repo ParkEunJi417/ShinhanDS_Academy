@@ -14,11 +14,11 @@ import javax.servlet.http.HttpFilter;
 public class EncodingFilter extends HttpFilter implements Filter {
 
     public EncodingFilter() {
-        System.out.println("EncodingFilter 생성");
+        //System.out.println("EncodingFilter 생성");
     }
 
 	public void destroy() {
-		System.out.println("EncodingFilter 소멸");
+		//System.out.println("EncodingFilter 소멸");
 	}
 
 	// *.do 요청시마다 수행

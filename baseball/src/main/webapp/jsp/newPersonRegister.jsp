@@ -4,7 +4,7 @@
 <link href="${path}/css/newPersonRegister.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+<div>
 	<div id="div-header">
 		<img id="img-kbo" src="${path}/images/KBO.png" alt="KBO">
 		<label id="label-header">야구 직관 프로그램</label>

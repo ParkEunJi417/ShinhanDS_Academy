@@ -80,7 +80,7 @@
 				<span class="input-group-text">경기일정</span>
 				<input type="text" class="datepicker_input form-control border-2" 
 				 placeholder="날짜 선택" id="input-date">
-				 <i class="bi bi-calendar-date"></i>
+				 <i class="bi bi-calendar-date" id="icon-calendar"></i>
 			</div>
 			<div class="input-group mb-2">
 				<span class="input-group-text">경기목록</span>
@@ -134,9 +134,7 @@ $(() => {
 	let isSelectTeam = false;
 	let startDate = "2014-01-01"; // 시작 날짜
 	let endDate = "2034-12-31";   // 종료 날짜
-	let selectableDates;
-
-	initializeDatepicker(); // 데이트피커 초기화 함수 실행
+	let selectableDates;	
 	
 	if ("${userid}" !== "" && "${userid}" !== null) {
         $('#div-login').css('display', 'none');
@@ -146,6 +144,7 @@ $(() => {
     }
 	
 	$('#img-kbo, #label-header').click(() => location.href = 'main');
+	$('#icon-calendar').click(() => $('#input-date').focus());
 	$('#btn-delete').click(deleteWatching); // 선택된 직관 삭제
 	$('#btn-deleteModal').click(checkDeleteRows); // 직관삭제 모달
 	$('#btn-insert').click(checkValidation); // 직관등록 모달 값 모두 입력됐는지 확인
@@ -154,8 +153,7 @@ $(() => {
 	    selectAllGameDate(); // 경기일정 ajax로 받아오기
 	});
 	$('tbody tr').click(function(event) { toggleCheckbox(event, this); }); // 행 클릭시 체크
-	
-	$('#input-date').change(selectByGameDate); // 해당 일자의 경기 일정 받아서 경기목록 option 부여
+
 	$('#select-game').change(() => {
 	    selectByMatchTeam(); // 해당 날짜의 경기한 팀 받아서 응원한 팀 option 부여
 	    selectGameNoById(); // 기등록 직관 경기 확인
@@ -164,45 +162,6 @@ $(() => {
 	    $('tbody input[type="checkbox"]').prop('checked', this.checked); // 전체 체크 및 해제
 	});
 
- 	// 전체 날짜 목록 생성 함수
-	function generateAllDates(startDate, endDate) {
-	    const dates = [];
-	    let currentDate = new Date(startDate);
-
-	    while (currentDate <= new Date(endDate)) {
-	        dates.push(currentDate.toISOString().split('T')[0]); // yyyy-mm-dd 형식
-	        currentDate.setDate(currentDate.getDate() + 1); // 하루 더하기
-	    }
-
-	    return dates;
-	}
-
-	// 비동기 함수로 처리
-	async function initializeDatepicker() {
-	    try {
-	        // AJAX 요청으로 데이터 가져오기
-	        const response = await fetch('${path}/allGameDate.select');
-	        const data = await response.json();	        
-	        const selectableDates = data.dates; // 서버에서 전달된 날짜 배열
-			const allDates = generateAllDates(startDate, endDate); // 전체 날짜 목록 생성
-
-	        // 선택 불가능한 날짜 계산
-	        const datesDisabled = allDates.filter(date => !selectableDates.includes(date));
-
-	        // Datepicker 초기화
-	        const elem = document.querySelector('#input-date');
-	        const datepicker = new Datepicker(elem, {
-	            format: 'yyyy-mm-dd',
-	            autohide: true,
-	            language: 'ko',
-	            datesDisabled: datesDisabled
-	        });
-
-	    } catch (error) {
-	        console.log("Error fetching dates:", error);
-	    }
-	}
-	
 	function deleteWatching(){
         // 체크된 행의 input value를 수집
         let inputValues = [];
@@ -231,7 +190,7 @@ $(() => {
 	
 	// 직관등록 모달 값 모두 입력됐는지 확인
 	function checkValidation(event){
-		let selectedDate = $('#select-date').val();
+		let selectedDate = $('#input-date').val();
 		let selectedGame = $('#select-game').val();
 		let selectedTeam = $('#select-team').val();
 		
@@ -253,12 +212,47 @@ $(() => {
 			url:"${path}/allGameDate.select",
 			type:"get",
 			success:function(data){
-				$('#select-date').html(data);
+				selectableDates = data.dates;
+				initializeDatepicker(); // 데이트피커 초기화 함수 실행
 			},
 			error:function(){}
 		});
 	}
+ 	
+	// 데이트피커 초기화 함수 실행
+	function initializeDatepicker() {
+		let allDates = generateAllDates(startDate, endDate); // 전체 날짜 목록 생성
+
+	    // 선택 불가능한 날짜 계산
+	    let datesDisabled = allDates.filter(date => !selectableDates.includes(date));
+
+	    // Datepicker 초기화
+        let $datepicker = $('#input-date');
+        let datepicker = new Datepicker($datepicker[0], {
+            format: 'yyyy-mm-dd',
+            autohide: true,
+            language: 'ko',
+            datesDisabled: datesDisabled
+        });
+
+        // Datepicker의 changeDate 이벤트 처리
+        $datepicker.on('changeDate', function(event) {
+            selectByGameDate(); // 해당 일자의 경기 일정 받아서 경기목록 option 부여
+        });
+	}
 	
+ 	// 전체 날짜 목록 생성 함수
+	function generateAllDates(startDate, endDate) {
+		let dates = [];
+	    let currentDate = new Date(startDate);
+
+	    while (currentDate <= new Date(endDate)) {
+	        dates.push(currentDate.toISOString().split('T')[0]); // yyyy-mm-dd 형식
+	        currentDate.setDate(currentDate.getDate() + 1); // 하루 더하기
+	    }
+	    return dates;
+	}
+ 	
 	// 행 클릭시 체크
 	function toggleCheckbox(event, row) {
 		if (!$(event.target).is('input[type="checkbox"]')) {
@@ -271,7 +265,6 @@ $(() => {
 	// 해당 일자의 경기 일정 받아서 경기목록 option 부여
 	function selectByGameDate(){
 		$('#div-validWatching').addClass('none');
-		console.log('실행했니?');
 		$.ajax({
 			url:"${path}/gameDate.select",
 			type:"get",
@@ -289,7 +282,7 @@ $(() => {
 			url:"${path}/matchTeam.select",
 			type:"get",
 			data:{
-				"date":$('#select-date').val(),
+				"date":$('#input-date').val(),
 				"no":$('#select-game').val()
 				},
 			success:function(data){

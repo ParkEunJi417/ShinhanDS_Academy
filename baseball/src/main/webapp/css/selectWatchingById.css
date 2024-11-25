@@ -105,6 +105,7 @@ td .container div {
 
 .datepicker-dropdown {
     z-index: 1055 !important; /* Bootstrap Modal의 z-index보다 높게 설정 */
+    color: #212529;
 }
 
 .input-group {
@@ -118,10 +119,15 @@ td .container div {
 .input-group .bi-calendar-date {
     position: absolute;
     right: 10px;  /* 오른쪽 10px 거리 */
-    top: 50%;     /* 세로 중앙 맞추기 */
+    top: 53%;     /* 세로 중앙 맞추기 */
     transform: translateY(-50%); /* 정확한 중앙 위치 */
     font-size: 1.2rem; /* 아이콘 크기 조정 */
     z-index: 1057;
+    color: #212529;
+}
+
+#icon-calendar:hover {
+	cursor: pointer;
 }
 
 #main {

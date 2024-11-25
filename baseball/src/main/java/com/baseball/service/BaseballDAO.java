@@ -335,25 +335,21 @@ public class BaseballDAO {
 	
 	// 해당 id의 직관들 삭제
 	public int deleteWatchingsById(String str_watchNos) {
-        StringBuilder placeholders = new StringBuilder();
         String[] watchNos = str_watchNos.split(",");
+        String sql = "delete from watching where watch_no in (";
         
-        for (int i = 0; i < watchNos.length; i++) {
-            placeholders.append("?");
-            if (i < watchNos.length - 1) {
-                placeholders.append(", ");
-            }
+        for (int i = 0; i <watchNos.length; i++) {
+        	sql += Integer.parseInt(watchNos[i]);
+        	if(i < watchNos.length - 1) {
+        		sql += ",";
+        	}
         }
-        
-		String sql = "delete from watching where watch_no in ("+placeholders+")";
+        sql += ")";
 
 		conn = DBUtil.getConnection();
 		try {
 			st = conn.prepareStatement(sql);
 			
-			for (int i = 0; i < watchNos.length; i++) {
-				st.setInt(i + 1, Integer.parseInt(watchNos[i]));
-            }
 			result = st.executeUpdate();
 
 		} catch (SQLException e) {

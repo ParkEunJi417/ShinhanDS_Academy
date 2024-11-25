@@ -3,6 +3,7 @@ package com.baseball.service;
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,17 +11,15 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter@Setter
+@Getter@Setter@Builder
+@ToString
 public class GameDTO {
 	int game_no;
-	int game_score;
-	String game_outcome;
 	Date game_date;
-	int team_id;
+
+	int team_score_a;		// 원정팀 점수
+	int team_id_a;			// 원정팀 id
 	
-	@Override
-	public String toString() {
-		return "경기번호:" + game_no + ", 점수:" + game_score + ", 결과:" + game_outcome
-				+ ", 경기일정:" + game_date + ", 구단아이디:" + team_id;
-	}
+	int team_score_h;		// 홈팀 점수
+	int team_id_h;			// 홈팀 id
 }

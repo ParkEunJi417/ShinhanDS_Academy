@@ -28,6 +28,11 @@
 			    </tr>
 			</thead>
 			<tbody>
+			<c:if test="${gameData != null && gameData.size() == 0}">
+				<tr>
+					<td colspan="2">경기 일정이 존재하지 않습니다.</td>
+				</tr>	
+			</c:if>
 			<c:forEach items="${gameData}" var="game">
 			<tr>
 		  	  <td class="date">${game.game_date}</td>
