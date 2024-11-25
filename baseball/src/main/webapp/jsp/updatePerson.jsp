@@ -101,7 +101,7 @@
 	        
 	        $(this).on('submit', function (event) {
 	        	
-	            if (!this.checkValidity() || validDomain) {
+	            if (!this.checkValidity() || !validDomain) {
 	                event.preventDefault();
 	                event.stopPropagation();
 	            }
@@ -137,6 +137,22 @@
 	        $inputDomain.val('').prop('readonly', false).prop('required', true);
 	        $inputDomain.on('input', function () { checkDomain($inputDomain); });
 	    }
+	}
+	
+	function checkDomain($input){
+		let value = $input.val();
+		
+		const emailRegex = /[^\s@]+\.[^\s@]+$/;
+		let result = emailRegex.test(value);
+        if (emailRegex.test(value)) {
+        	validDomain = true;
+            $('#div-invalidDomain').removeClass('block');
+			$('#div-invalidDomain').addClass('none');
+        } else {
+            validDomain = false;
+            $('#div-invalidDomain').removeClass('none');
+			$('#div-invalidDomain').addClass('block');
+        }
 	}
 	
 	// 패스워드 표시 체크시 입력한 값 보여줌

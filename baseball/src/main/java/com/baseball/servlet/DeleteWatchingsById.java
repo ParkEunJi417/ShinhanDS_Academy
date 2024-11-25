@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.baseball.service.BaseballService;
 
+//해당 id의 직관 1건 이상 삭제
 @WebServlet("/watchingsById.delete")
 public class DeleteWatchingsById extends HttpServlet {
 	private static final long serialVersionUID = 1L;

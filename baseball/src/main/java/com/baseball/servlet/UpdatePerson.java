@@ -41,13 +41,8 @@ public class UpdatePerson extends HttpServlet {
 
 		PersonDTO person = makePerson(request, sessionId);
 		int updatePerson = bService.updatePerson(person);
-
-//		boolean isInsert = insertPerson==1?true:false;
-//		
-//		request.setAttribute("result", isInsert);
-//		request.setAttribute("newPersonId", request.getParameter("person_id"));
-//		RequestDispatcher rd = request.getRequestDispatcher("jsp/newPersonRegister.jsp");
-//		rd.forward(request, response);
+		
+		response.sendRedirect("main");
 	}
 
 	private PersonDTO makePerson(HttpServletRequest request, String sessionId) {

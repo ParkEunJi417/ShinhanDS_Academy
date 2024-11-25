@@ -22,6 +22,28 @@ a:click {
 	font-weight: bold;
 }
 
+.content {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.background {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.background #img-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    opacity: 0.7;
+    z-index: -1;
+}
+
 #div-header, #div-menu, #div-login, #div-logout {
 	display: flex;
 	align-items: center;
@@ -31,13 +53,17 @@ a:click {
 #div-login, #div-logout {
 	margin-top: 20px;
 	justify-content: right;
+	margin-right: 10%;
 }
 
 #div-menu div {
 	display: inline-block;
-	border: 2px solid #002561;
-	margin: 5px;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 5px;
+	margin-top: 15px;
 	padding: 3px;
+	font-weight: bold;
 }
 
 #div-menu div:hover {
