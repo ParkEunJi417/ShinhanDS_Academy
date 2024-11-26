@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +42,10 @@ public class ScrapingService extends HttpServlet {
 	int result;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  System.setProperty("webdriver.chrome.driver", "C:\\shinhanDS\\install\\chromedriver\\chromedriver.exe");
+		  ServletContext application = request.getServletContext();
+		  String realPath = application.getRealPath(".");
+		  
+		  System.setProperty("webdriver.chrome.driver", realPath+"/driver/chromedriver.exe");
 		  WebDriver driver = new ChromeDriver();
 		  List<GameDTO> gamelist = new ArrayList<>();
 		  int total = 0;
@@ -144,7 +148,7 @@ public class ScrapingService extends HttpServlet {
 			} finally {
 				driver.quit();
 			}
-		  System.out.println("총 "+total+"건 저장");		  
+		  //System.out.println("총 "+total+"건 저장");		  
 	}
 	
 	private int custionTeamId(String name) {
@@ -186,8 +190,8 @@ public class ScrapingService extends HttpServlet {
             }
             int[] updateCounts = st.executeBatch();
 
-            conn.commit();
-            //conn.rollback();
+            //conn.commit();
+            conn.rollback();
 
 			result = updateCounts.length;
 		} catch (SQLException e) {
