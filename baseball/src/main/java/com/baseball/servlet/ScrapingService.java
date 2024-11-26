@@ -26,9 +26,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import com.baseball.service.BaseballService;
 import com.baseball.service.GameDTO;
 import com.baseball.util.DBUtil;
 import com.baseball.util.DateUtil;
+
+import graphql.parser.antlr.GraphqlBaseVisitor;
 
 /**
  * Servlet implementation class ScrapingService
@@ -47,6 +50,7 @@ public class ScrapingService extends HttpServlet {
 		  
 		  System.setProperty("webdriver.chrome.driver", realPath+"/driver/chromedriver.exe");
 		  WebDriver driver = new ChromeDriver();
+		  BaseballService bService = new BaseballService();
 		  List<GameDTO> gamelist = new ArrayList<>();
 		  int total = 0;
 		  
@@ -135,12 +139,20 @@ public class ScrapingService extends HttpServlet {
 												 .team_score_h(team_score_h)
 												 .team_id_h(team_id_h)
 												 .build();
-							gamelist.add(game);
+							int existingGameCount = bService.selectGame(game);
+							if(existingGameCount == 0) {
+								gamelist.add(game);
+							}
 						}
 					}
-					int result = insertGame(gamelist); 
-					total += result;
-					System.out.println(result+"건 저장");
+					if(gamelist.size() > 0) {
+						int result = bService.insertGame(gamelist); 
+						total += result;
+						System.out.println(result+"건 저장");
+					} else {
+						System.out.println("이미 DB에 등록되어 저장하지 않음");
+					}
+					
 					gamelist = new ArrayList<>();
 	            }
 			} catch (Exception e) {
@@ -148,7 +160,7 @@ public class ScrapingService extends HttpServlet {
 			} finally {
 				driver.quit();
 			}
-		  //System.out.println("총 "+total+"건 저장");		  
+		  System.out.println("총 "+total+"건 저장");		  
 	}
 	
 	private int custionTeamId(String name) {
@@ -166,40 +178,6 @@ public class ScrapingService extends HttpServlet {
 			case "키움" -> result = 9;
 			case "한화" -> result = 10;
 		}
-		
-		return result;
-	}
-
-	private int insertGame(List<GameDTO> gamelist) {
-		String sql = "insert into game values(seq_gameNo.NEXTVAL,?,?,?,?,?)";
-		conn = DBUtil.getConnection();
-
-		try {
-			st = conn.prepareStatement(sql);
-			
-			conn.setAutoCommit(false);
-
-            for (GameDTO game:gamelist) {
-                st.setInt(1, game.getTeam_id_a());
-                st.setInt(2, game.getTeam_id_h());
-                st.setInt(3, game.getTeam_score_a());
-                st.setInt(4, game.getTeam_score_h());
-                st.setDate(5, game.getGame_date());
-
-                st.addBatch();
-            }
-            int[] updateCounts = st.executeBatch();
-
-            //conn.commit();
-            conn.rollback();
-
-			result = updateCounts.length;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.dbDisconnect(conn, st, null);
-		}
-
 		return result;
 	}
 }

@@ -177,15 +177,6 @@ public class BaseballDAO {
 				game.setTeam_name_a(rs.getString("team_name_a"));
 				game.setTeam_id_h(rs.getInt("team_id_h"));
 				game.setTeam_name_h(rs.getString("team_name_h"));
-				
-//				if(rs.getInt("team_id_a") < rs.getInt("team_id_h")) {
-//					matchTeam=rs.getInt("team_id_a")+","+rs.getString("team_name_a")+"/"
-//							+rs.getInt("team_id_h")+","+rs.getString("team_name_h");
-//				}
-//				else {
-//					matchTeam=rs.getInt("team_id_h")+","+rs.getString("team_name_h")+"/"
-//							+rs.getInt("team_id_a")+","+rs.getString("team_name_a");
-//				}
 			}	
 			
 		} catch (SQLException e) {
@@ -420,6 +411,74 @@ public class BaseballDAO {
 		} finally {
 			DBUtil.dbDisconnect(conn, st, null);
 		}
+		return result;
+	}
+	
+	// 이미 DB에 존재하는 경기인지 확인
+	public int selectGame(GameDTO game) {
+		String sql = """
+				select count(*)
+				from game 
+				where team_id_a=? and team_id_h=? 
+				and team_score_a=? and team_score_h=? 
+				and game_date=?
+				""";
+
+		conn = DBUtil.getConnection();
+
+		try {
+			st = conn.prepareStatement(sql);
+			st.setInt(1, game.getTeam_id_a());
+            st.setInt(2, game.getTeam_id_h());
+            st.setInt(3, game.getTeam_score_a());
+            st.setInt(4, game.getTeam_score_h());
+            st.setDate(5, game.getGame_date());
+
+			rs = st.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			result = -1;
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
+		}
+		return result;
+	}
+	
+	// 경기 입력
+	public int insertGame(List<GameDTO> gamelist) {
+		String sql = "insert into game values(seq_gameNo.NEXTVAL,?,?,?,?,?)";
+		conn = DBUtil.getConnection();
+
+		try {
+			st = conn.prepareStatement(sql);
+			
+			conn.setAutoCommit(false);
+
+            for (GameDTO game:gamelist) {
+                st.setInt(1, game.getTeam_id_a());
+                st.setInt(2, game.getTeam_id_h());
+                st.setInt(3, game.getTeam_score_a());
+                st.setInt(4, game.getTeam_score_h());
+                st.setDate(5, game.getGame_date());
+
+                st.addBatch();
+            }
+            int[] updateCounts = st.executeBatch();
+
+            //conn.commit();
+            conn.rollback();
+
+			result = updateCounts.length;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+
 		return result;
 	}
 

@@ -75,5 +75,15 @@ public class BaseballService {
 	public int updatePerson(PersonDTO bb) {
 		return bbDAO.updatePerson(bb);
 	}
+	
+	// 이미 DB에 존재하는 경기인지 확인
+	public int selectGame(GameDTO game) {
+		return bbDAO.selectGame(game);
+	}
+	
+	// 경기 입력
+	public int insertGame(List<GameDTO> gamelist) {
+		return bbDAO.insertGame(gamelist);
+	}
 
 }
