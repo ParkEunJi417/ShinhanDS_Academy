@@ -6,7 +6,7 @@
 이 저장소는 신한DS 아카데미 과정에서 진행된 프로젝트 및 학습 자료를 관리하기 위해 생성되었습니다. Spring Framework 기반 웹 애플리케이션 개발, API 통합, 데이터 처리 등의 내용을 포함합니다.
 
 ## 🛠 기술 스택
-- **Backend**: Spring Framework, Spring MVC, JPA
+- **Backend**: Spring Framework, Spring MVC, MyBatis
 - **Frontend**: JSP, HTML, CSS, JavaScript (IMask 활용)
 - **Database**: MySQL
 - **API 통합**: 외부 REST API
